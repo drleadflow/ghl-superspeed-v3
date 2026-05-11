@@ -303,7 +303,7 @@ Use the `token-id` header with a Firebase JWT. NOT `Authorization: Bearer`. Ever
 ## File Structure
 
 ```
-ghl-superspeed-v3/
+GHL-Superspeed-V3-Better-Version/
   lib/engine.py              Core engine (TokenManager, GHLClient, CampaignBuilder, step builders)
   campaigns/ppp-webinar.py   Example: 8-workflow webinar campaign
   tests/test_engine.py       28 unit tests (all passing)
@@ -311,8 +311,11 @@ ghl-superspeed-v3/
   tests/verify_consolidated.py  Consolidated 6-workflow verification test
   scripts/refresh-token.sh   Firebase JWT refresh helper
   templates/blueprints.json  Campaign blueprint templates
-  chrome-extension/          Chrome extension for passive token capture
+  templates/*.md             Obsidian note templates (vault)
+  business/, services/, offers/, clients/, references/   Obsidian vault knowledge base
 ```
+
+> **Knowledge base**: This folder doubles as an Obsidian vault. Business/services/offers/clients knowledge lives alongside the engine code. See `VAULT-README.md`.
 
 ---
 
@@ -345,6 +348,12 @@ With MCP access, you get 18 workflow builder tools in Claude Code. Add to `.mcp.
 ```
 
 For MCP access: **info@doctorleadflow.com**
+
+---
+
+## Slash commands
+
+- `/a2p-fill-values <url> <location_id> [--client <slug>] [--refresh-token <t>]` — populate the 18 custom values the A2P landing-page funnel + opt-in form use, from a business URL + optional vault brief; dry-run preview, then apply.
 
 ---
 
