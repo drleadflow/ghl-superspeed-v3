@@ -63,6 +63,7 @@ class TokenManager:
         self._token: Optional[str] = None
         self._token_time: float = 0
         self._refresh_token: Optional[str] = None
+        self.prefer_refresh_token: bool = False  # when True + a refresh token is set, use Firebase before broker/MCP
 
     def get_token(self) -> str:
         """Get a valid token from the best available source."""
@@ -70,7 +71,23 @@ class TokenManager:
         if self._token and (time.time() - self._token_time) < 3000:
             return self._token
 
-        # 2. Try MCP server (Chrome extension deposits tokens here)
+        # 1b. If caller explicitly wants the refresh-token identity, use it first
+        #     (avoids a cached DLF broker/MCP token winning for a non-DLF agency location).
+        if self.prefer_refresh_token and self._refresh_token:
+            token = self._refresh_firebase()
+            if token:
+                self._token = token
+                self._token_time = time.time()
+                return token
+
+        # 2. Try CF Worker token broker (preferred — survives session resets)
+        token = self._fetch_from_broker()
+        if token:
+            self._token = token
+            self._token_time = time.time()
+            return token
+
+        # 3. Try MCP server (Chrome extension deposits tokens here)
         token = self._fetch_from_mcp()
         if token:
             self._token = token
@@ -108,6 +125,26 @@ class TokenManager:
         self._token = None
         self._token_time = 0
         return self.get_token()
+
+    def _fetch_from_broker(self) -> Optional[str]:
+        url = os.environ.get("GHL_TOKEN_BROKER_URL", "")
+        auth = os.environ.get("GHL_TOKEN_BROKER_AUTH", "")
+        if not url or not auth:
+            return None
+        try:
+            req = urllib.request.Request(
+                f"{url.rstrip('/')}/token",
+                headers={
+                    "Authorization": f"Bearer {auth}",
+                    "Accept": "application/json",
+                    "User-Agent": CHROME_UA,
+                },
+            )
+            with urllib.request.urlopen(req, context=CTX, timeout=10) as r:
+                data = json.loads(r.read())
+                return data.get("id_token", "") or None
+        except Exception:
+            return None
 
     def _fetch_from_mcp(self) -> Optional[str]:
         # Try CLI token endpoint (requires ADMIN_PIN)
@@ -184,6 +221,9 @@ class GHLClient:
         self._call_count += 1
         # Ensure token is ASCII-safe (JWT should be, but strip any stray chars)
         safe_token = token.encode('ascii', 'ignore').decode('ascii').strip()
+        # Backend currently accepts the Firebase ID token in the `token-id` header
+        # (the 2026-04-21 Bearer-authToken switch did not stick / endpoint accepts both;
+        # token-id verified working 2026-05-05).
         headers = {
             "token-id": safe_token,
             "channel": "APP",
@@ -198,14 +238,21 @@ class GHLClient:
         try:
             with urllib.request.urlopen(req, context=CTX, timeout=30) as resp:
                 text = resp.read().decode()
-                return json.loads(text) if text else {}
+                if not text or not text.strip():
+                    return {}
+                try:
+                    return json.loads(text)
+                except json.JSONDecodeError:
+                    # GHL occasionally returns 200 with whitespace-only body for
+                    # idempotent POSTs (tag create, trigger reattach). Treat as success.
+                    return {}
         except urllib.error.HTTPError as e:
             if e.code in (401, 403):
                 return None  # Signal retry
             error_body = e.read().decode() if e.fp else ""
             print(f"  API ERROR {e.code}: {error_body[:200]}")
             return {"_error": True, "code": e.code, "message": error_body[:200]}
-        except Exception as ex:
+        except (urllib.error.URLError, OSError, TimeoutError) as ex:
             print(f"  REQUEST ERROR: {ex}")
             return {"_error": True, "message": str(ex)}
 
@@ -224,23 +271,109 @@ class GHLClient:
 
 
 # ── Email Formatter ───────────────────────────────────────────────────────────
+#
+# Canonical format captured live 2026-05-06 from IV Wellness NAD+ E1
+# (see .claude/email-format-reference.json + memory feedback_email_format_ghl.md).
+# GHL's Quick Compose editor is ProseMirror-backed; the styles below match what
+# the editor persists when a human composes an email there. Round-tripping in
+# this exact shape avoids the editor "fixing up" our HTML on first open.
+
+# Default paragraph (prose) — has natural bottom margin so adjacent prose
+# paragraphs separated by a single newline in source render with one enter
+# of vertical space.
+EMAIL_P_STYLE = (
+    "margin:0px 0px 16px 0px; line-height: 1.75;padding-left: 0px!important;"
+    "font-size: 16px;font-family: arial,helvetica,sans-serif;"
+    "color: #000;"
+)
+# Tight paragraph (list items, signature lines, short adjacent runs) — keeps
+# consecutive lines stacked with no extra gap.
+EMAIL_P_STYLE_TIGHT = (
+    "margin:0px; line-height: 1.75;padding-left: 0px!important;"
+    "font-size: 16px;font-family: arial,helvetica,sans-serif;"
+    "color: #000;"
+)
+EMAIL_BLANK_P_STYLE = "margin:0px; padding-left: 0px!important;"
+EMAIL_BLANK_P = f'<p style="{EMAIL_BLANK_P_STYLE}"><br class="ProseMirror-trailingBreak"></p>'
+EMAIL_LINK_REL = "noopener noreferrer nofollow"
+DEFAULT_BOOKING_LINK_TOKEN = "{{custom_values.booking_link}}"
+
+_BARE_BRACKET_RE = re.compile(r"^\[([^\]]+)\]$")
+_LINK_MD_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+# Lines that should render TIGHT (no bottom margin) — consecutive list items
+# or numbered list items. Bold-only headers also stay tight when followed
+# immediately by their content paragraph.
+_LIST_ITEM_RE = re.compile(r"^([\-\*•]|\d+[\.\)])\s+\S")
+
+
+def _email_inline(line: str) -> str:
+    """Apply inline markdown: [text](url) anchor, **bold**, *italic*."""
+    line = _LINK_MD_RE.sub(
+        lambda m: (
+            f'<a target="_blank" rel="{EMAIL_LINK_REL}" '
+            f'href="{m.group(2)}" title="[{m.group(1)}]">[{m.group(1)}]</a>'
+        ),
+        line,
+    )
+    line = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', line)
+    line = re.sub(r'\*(.+?)\*', r'<em>\1</em>', line)
+    return line
+
 
 def dm_email(text: str) -> str:
-    """Convert plain text to Dan Martell style HTML email."""
-    lines = text.strip().split('\n')
-    html_parts = []
-    for line in lines:
-        line = line.strip()
-        if not line:
+    """Render plain text to GHL Quick-Compose HTML.
+
+    Spacing model (per user feedback 2026-05-08, "one enter between sections"):
+      - Each non-blank source line → one styled ``<p>``.
+      - Default paragraph style has bottom margin (16px), so adjacent
+        paragraphs naturally render with one enter of vertical space.
+      - List-item lines (``- item``, ``* item``, ``1. item``) render TIGHT
+        (margin:0) so consecutive bullets stay packed. The line BEFORE a
+        list run is also rendered tight so its bottom margin doesn't push
+        the bullets away from their lead-in (e.g., a bold header).
+      - The LAST line in a list run keeps the standard margin so the next
+        section gets the one-enter gap.
+      - Blank source line → ``EMAIL_BLANK_P`` separator (legacy support).
+      - Bare ``[Label]`` line → anchor wrapped to ``{{custom_values.booking_link}}``.
+      - Inline ``[text](url)``, ``**bold**``, ``*italic*`` honored.
+    """
+    raw_lines = text.strip().split('\n')
+
+    # Pre-compute which lines are list items so we can keep the *preceding*
+    # paragraph tight too (lead-in to a list shouldn't have margin pushing
+    # it away from the bullets).
+    is_list = [bool(_LIST_ITEM_RE.match(l.strip())) for l in raw_lines]
+
+    parts: list[str] = []
+    for i, raw in enumerate(raw_lines):
+        stripped = raw.strip()
+        if not stripped:
+            parts.append(EMAIL_BLANK_P)
             continue
-        line = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', line)
-        line = re.sub(r'\*(.+?)\*', r'<em>\1</em>', line)
-        html_parts.append(
-            f'<p style="margin:0 0 12px 0;line-height:1.75;'
-            f'font-size:16px;font-family:arial,helvetica,sans-serif;'
-            f'color:#000;">{line}</p>'
-        )
-    return ''.join(html_parts)
+        # Tight if THIS line is a list item AND it's not the last item in
+        # the current list run (last item keeps margin so next section
+        # breathes), OR if THIS line is the lead-in immediately before a
+        # list run.
+        next_is_list = i + 1 < len(raw_lines) and is_list[i + 1]
+        if is_list[i] and next_is_list:
+            style = EMAIL_P_STYLE_TIGHT
+        elif (not is_list[i]) and next_is_list:
+            style = EMAIL_P_STYLE_TIGHT
+        else:
+            style = EMAIL_P_STYLE
+
+        m = _BARE_BRACKET_RE.match(stripped)
+        if m:
+            label = m.group(1)
+            anchor = (
+                f'<a target="_blank" rel="{EMAIL_LINK_REL}" '
+                f'href="{DEFAULT_BOOKING_LINK_TOKEN}" '
+                f'title="[{label}]">[{label}]</a>'
+            )
+            parts.append(f'<p style="{style}">{anchor}</p>')
+            continue
+        parts.append(f'<p style="{style}">{_email_inline(stripped)}</p>')
+    return ''.join(parts)
 
 
 # ── Step Builders (type-safe, validated) ──────────────────────────────────────
@@ -282,6 +415,22 @@ def tag_step(name: str, tags: list, remove: bool = False, **kw) -> dict:
     t = "remove_contact_tag" if remove else "add_contact_tag"
     return {"id": _uid(), "type": t, "name": name,
             "attributes": {"tags": tags}, **kw}
+
+def update_contact_field_step(name: str, field: str, value: str,
+                              title: str = "", field_type: str = "TEXT", **kw) -> dict:
+    """Update Contact Field action.
+    Canonical attributes shape verified via tests/verify_individual.py:
+      {"fields": [{"field": "<key|uuid>", "value": "...", "title": "...", "type": "TEXT"}]}
+    For STANDARD fields use the slug (e.g. "first_name"). For CUSTOM fields,
+    `field` should be the GHL custom-field UUID (per location).
+    """
+    return {"id": _uid(), "type": "update_contact_field", "name": name,
+            "attributes": {"fields": [{
+                "field": field,
+                "value": value,
+                "title": title or field.replace("_", " ").title(),
+                "type": field_type,
+            }]}, **kw}
 
 def webhook_step(name: str, url: str, method: str = "POST", data: list = None, **kw) -> dict:
     return {"id": _uid(), "type": "webhook", "name": name,
@@ -337,6 +486,155 @@ def validate_campaign(campaign: dict) -> list:
     return errors
 
 
+# ── Notion sync ───────────────────────────────────────────────────────────────
+
+NOTION_API_BASE = "https://api.notion.com/v1"
+NOTION_VERSION = "2022-06-28"
+NOTION_BUILT_PROPERTY = "28 Day Nurture Sequence Built"
+
+
+def _notion_mark_offer_built(page_id, property_name=NOTION_BUILT_PROPERTY):
+    """Set the '28 Day Nurture Sequence Built' checkbox = true on a Notion page.
+
+    Reads NOTION_TOKEN from env. Fails soft — never raises into the caller.
+    Returns True on success, False on any failure (auth missing, API error, etc).
+    """
+    token = os.environ.get("NOTION_TOKEN")
+    if not token or not page_id:
+        if not token:
+            print("  Notion sync skipped: NOTION_TOKEN not set in env")
+        return False
+
+    body = json.dumps({
+        "properties": {property_name: {"checkbox": True}}
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        f"{NOTION_API_BASE}/pages/{page_id}",
+        data=body,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Notion-Version": NOTION_VERSION,
+            "Content-Type": "application/json",
+        },
+        method="PATCH",
+    )
+    try:
+        with urllib.request.urlopen(req, context=CTX, timeout=15) as resp:
+            return resp.status == 200
+    except Exception as ex:
+        print(f"  Notion sync failed: {ex}")
+        return False
+
+
+# ── Trigger body builder ──────────────────────────────────────────────────────
+
+def _build_trigger_body(wf_def, wf_id, wf_ids_by_key, location_id, company_id):
+    """Build the GHL trigger POST body from a workflow definition.
+
+    Accepts two config shapes (rich dict takes precedence):
+
+        wf_def["trigger"] = {"type": "facebook_lead_gen", "fb_page_id": "...", "fb_form_id": "..."}
+        wf_def["trigger"] = {"type": "customer_reply", "source_wf_key": "01-master", "keyword": "RESET"}
+        wf_def["trigger"] = {"type": "contact_tag", "tag": "..."}
+        wf_def["tag"] = "..."   # legacy — emits contact_tag
+
+    fb_page_id and fb_form_id are both optional (omit = "any page" / "any form").
+    keyword may be a string or list of strings (omit for any reply).
+    source_wf_key is the campaign-dict key of the source workflow (engine
+    resolves to wf_id post-create); source_wf_id may be passed directly instead.
+
+    Returns:
+        (trigger_body_dict, location_tag_to_create_or_None)
+        location_tag_to_create is set only for contact_tag — engine still
+        needs to POST /tags/create before the trigger references it.
+        Returns (None, None) if no trigger is configured or unresolvable.
+    """
+    trigger_cfg = wf_def.get("trigger")
+    legacy_tag = wf_def.get("tag")
+
+    if isinstance(trigger_cfg, dict):
+        cfg = trigger_cfg
+    elif legacy_tag:
+        cfg = {"type": "contact_tag", "tag": legacy_tag}
+    else:
+        return None, None
+
+    ttype = cfg.get("type", "contact_tag")
+
+    base = {
+        "status": "draft",
+        "workflowId": wf_id,
+        "schedule_config": {},
+        "type": ttype,
+        "masterType": "highlevel",
+        "actions": [{"workflow_id": wf_id, "type": "add_to_workflow"}],
+        "active": True,
+        "triggersChanged": True,
+        "location_id": location_id,
+        "company_id": company_id,
+        "company_age": 49,
+    }
+
+    if ttype == "contact_tag":
+        tag = cfg.get("tag")
+        if not tag:
+            return None, None
+        base["conditions"] = [{
+            "operator": "index-of-true", "field": "tagsAdded", "value": tag,
+            "title": "Tag Added", "type": "select", "id": "tag-added",
+        }]
+        base["name"] = cfg.get("name") or tag.replace("-", " ").title()
+        return base, tag
+
+    if ttype == "facebook_lead_gen":
+        conditions = []
+        if cfg.get("fb_page_id"):
+            conditions.append({
+                "operator": "==", "field": "facebook.pageId",
+                "value": cfg["fb_page_id"],
+                "title": "Page is", "type": "select",
+            })
+        if cfg.get("fb_form_id"):
+            conditions.append({
+                "operator": "==", "field": "facebook.formId",
+                "value": cfg["fb_form_id"],
+                "title": "Form is", "type": "select",
+            })
+        base["conditions"] = conditions
+        base["name"] = cfg.get("name", "Facebook Lead Form Submitted")
+        return base, None
+
+    if ttype == "customer_reply":
+        source_wf_id = cfg.get("source_wf_id")
+        if not source_wf_id:
+            source_key = cfg.get("source_wf_key")
+            source_wf_id = wf_ids_by_key.get(source_key) if source_key else None
+        if not source_wf_id:
+            return None, None
+        conditions = [{
+            "operator": "==", "field": "workflow.id", "value": source_wf_id,
+            "title": "Replied to Workflow", "type": "select",
+        }]
+        keyword = cfg.get("keyword")
+        if keyword:
+            keywords = [keyword] if isinstance(keyword, str) else list(keyword)
+            conditions.append({
+                "operator": "string-matches-any-of", "field": "message.body",
+                "value": keywords,
+                "title": "Exact match phrase", "type": "input",
+                "id": "message-exact-phrase",
+            })
+        base["conditions"] = conditions
+        if cfg.get("name"):
+            base["name"] = cfg["name"]
+        else:
+            kw_suffix = f" - {keyword}" if isinstance(keyword, str) else ""
+            base["name"] = f"Replied to workflow{kw_suffix}"
+        return base, None
+
+    return None, None
+
+
 # ── Campaign Builder (the core engine) ────────────────────────────────────────
 
 class CampaignBuilder:
@@ -363,8 +661,15 @@ class CampaignBuilder:
         }
 
     def build(self, campaign: dict, folder_name: str, parent_folder: str = None,
-              company_id: str = "", user_id: str = "") -> dict:
-        """Build an entire campaign. Returns stats."""
+              company_id: str = "", user_id: str = "",
+              notion_page_id: str = None) -> dict:
+        """Build an entire campaign. Returns stats.
+
+        If `notion_page_id` is provided AND the deploy is fully successful
+        (every step saved, no errors), the engine sets the
+        "28 Day Nurture Sequence Built" checkbox = true on that Notion page
+        in the Offers (Database). Requires NOTION_TOKEN env var. Fails soft.
+        """
         self.stats["start_time"] = time.time()
 
         # Pre-flight validation
@@ -389,59 +694,62 @@ class CampaignBuilder:
             return self.stats
         print(f"Folder: {folder_id}\n")
 
-        # Pipeline per workflow: create → PUT steps (version=1) → trigger
-        # All 8 workflows run their full pipeline concurrently.
-        print("Building workflows + steps + triggers (all parallel)...")
+        # Two-phase parallel build:
+        #   Phase 1 — POST /workflow for every entry, collect wf_ids by key.
+        #   Phase 2 — for each workflow, build trigger + save steps + sync.
+        # Phase 1 finishes first so customer_reply triggers can resolve
+        # cross-workflow references (e.g. WF-03 trigger filters on WF-01's id).
         wf_ids = {}
 
-        def _create_and_trigger(key, wf_def):
-            """Full pipeline: create → save steps → create trigger."""
-            # Step 1: Create workflow (name only — inline workflowData loses the name)
+        # ── Phase 1: create workflow shells in parallel ──
+        print("Phase 1: Creating workflows...")
+        def _phase1(key, wf_def):
             create_body = {"name": wf_def["name"], "parentId": folder_id}
             result = self.client.request("POST", f"/workflow/{self.loc}", create_body)
-            if not result or not result.get("id"):
-                return key, None, False
+            return key, (result.get("id") if result else None)
 
-            wf_id = result["id"]
+        with ThreadPoolExecutor(max_workers=10) as pool:
+            futures = [pool.submit(_phase1, k, v) for k, v in campaign.items()]
+            for fut in as_completed(futures):
+                key, wf_id = fut.result()
+                if wf_id:
+                    wf_ids[key] = wf_id
+                    self.stats["workflows_created"] += 1
+                else:
+                    self.stats["errors"].append(
+                        f"Failed to create workflow shell: {campaign[key]['name']}"
+                    )
 
-            # Step 2: Create location tag + trigger via POST
-            tag = wf_def.get("tag")
+        # ── Phase 2: build trigger + steps + sync per workflow, in parallel ──
+        print("Phase 2: Triggers + steps + sync (all parallel)...")
+
+        def _phase2(key, wf_def):
+            """Trigger + steps + final sync. wf_id resolved from Phase 1."""
+            wf_id = wf_ids.get(key)
+            if not wf_id:
+                return key, None, False, False
+
+            # Build the trigger body using the unified helper. Supports
+            # contact_tag (legacy "tag" string OR {"type":"contact_tag",...}),
+            # facebook_lead_gen, and customer_reply.
+            trigger_body, location_tag = _build_trigger_body(
+                wf_def, wf_id, wf_ids, self.loc, company_id
+            )
             trigger_data = None
             trigger_ok = False
-            if tag:
-                # Create the tag at location level first — without this,
-                # the trigger condition references a tag the UI can't resolve
-                # and it renders blank. Captured from GHL advanced canvas builder:
-                # POST /workflow/{loc}/tags/create {"tag": "..."}
-                self.client.request(
-                    "POST", f"/workflow/{self.loc}/tags/create", {"tag": tag}
-                )
 
-                trigger_body = {
-                    "status": "draft",
-                    "workflowId": wf_id,
-                    "schedule_config": {},
-                    "conditions": [
-                        {
-                            "operator": "index-of-true",
-                            "field": "tagsAdded",
-                            "value": tag,
-                            "title": "Tag Added",
-                            "type": "select",
-                            "id": "tag-added",
-                        }
-                    ],
-                    "type": "contact_tag",
-                    "masterType": "highlevel",
-                    "name": tag.replace("-", " ").title(),
-                    "actions": [{"workflow_id": wf_id, "type": "add_to_workflow"}],
-                    "active": True,
-                    "triggersChanged": True,
-                    "location_id": self.loc,
-                    "company_id": company_id,
-                    "company_age": 47,
-                }
-                tr = self.client.request("POST", f"/workflow/{self.loc}/trigger", trigger_body)
+            if trigger_body:
+                # contact_tag triggers require the tag to exist at location
+                # level first — otherwise the UI renders the condition blank.
+                if location_tag:
+                    self.client.request(
+                        "POST", f"/workflow/{self.loc}/tags/create",
+                        {"tag": location_tag}
+                    )
+
+                tr = self.client.request(
+                    "POST", f"/workflow/{self.loc}/trigger", trigger_body
+                )
                 if tr and tr.get("id"):
                     trigger_ok = True
                     trigger_id = tr["id"]
@@ -449,8 +757,10 @@ class CampaignBuilder:
 
                     # Link trigger to first step via PUT — without targetActionId,
                     # the trigger node floats disconnected on the advanced canvas.
-                    # Captured: PUT /workflow/{loc}/trigger/{id} with targetActionId
-                    first_step_id = wf_def["templates"][0]["id"] if wf_def.get("templates") else None
+                    first_step_id = (
+                        wf_def["templates"][0]["id"]
+                        if wf_def.get("templates") else None
+                    )
                     if first_step_id:
                         update_body = {
                             **trigger_body,
@@ -458,7 +768,8 @@ class CampaignBuilder:
                             "advanceCanvasMeta": {"position": {"x": 57.5, "y": -73}},
                         }
                         self.client.request(
-                            "PUT", f"/workflow/{self.loc}/trigger/{trigger_id}", update_body
+                            "PUT", f"/workflow/{self.loc}/trigger/{trigger_id}",
+                            update_body
                         )
                         trigger_data["targetActionId"] = first_step_id
 
@@ -477,7 +788,7 @@ class CampaignBuilder:
             # fails with 422 when called programmatically. The regular PUT with
             # triggersChanged + oldTriggers/newTriggers reliably syncs triggers
             # to Firebase Storage. Discovered via live integration testing 2026-03-23.
-            if steps_ok and (trigger_data or True):
+            if steps_ok:
                 current = self.client.request("GET", f"/workflow/{self.loc}/{wf_id}")
                 if current and not current.get("_error"):
                     # Build trigger list for Firebase sync
@@ -545,15 +856,14 @@ class CampaignBuilder:
 
         with ThreadPoolExecutor(max_workers=10) as pool:
             futures = [
-                pool.submit(_create_and_trigger, key, wf_def)
+                pool.submit(_phase2, key, wf_def)
                 for key, wf_def in campaign.items()
+                if key in wf_ids
             ]
 
             for future in as_completed(futures):
                 key, wf_id, steps_ok, trigger_ok = future.result()
                 if wf_id:
-                    wf_ids[key] = wf_id
-                    self.stats["workflows_created"] += 1
                     if steps_ok:
                         self.stats["steps_saved"] += len(campaign[key]["templates"])
                     if trigger_ok:
@@ -562,7 +872,12 @@ class CampaignBuilder:
                     if not steps_ok:
                         parts.append("STEPS FAILED")
                     if trigger_ok:
-                        parts.append(f"trigger ({campaign[key].get('tag')})")
+                        tcfg = campaign[key].get("trigger")
+                        if isinstance(tcfg, dict):
+                            label = tcfg.get("type", "trigger")
+                        else:
+                            label = campaign[key].get("tag", "trigger")
+                        parts.append(f"trigger ({label})")
                     print(f"  {campaign[key]['name']}: {' + '.join(parts)}")
                 else:
                     self.stats["errors"].append(f"Failed: {campaign[key]['name']}")
@@ -587,14 +902,34 @@ class CampaignBuilder:
                 print(f"    - {e}")
         print(f"{'='*50}")
 
-        # Print GHL links for manual trigger tag selection
+        # Print GHL links for visual verification
         if wf_ids:
             print(f"\nOpen in GHL to verify triggers:")
             for key in sorted(wf_ids.keys()):
                 wf_id = wf_ids[key]
-                tag = campaign[key].get("tag", "")
-                print(f"  {campaign[key]['name']} [{tag}]:")
+                tcfg = campaign[key].get("trigger")
+                if isinstance(tcfg, dict):
+                    label = tcfg.get("type", "")
+                else:
+                    label = campaign[key].get("tag", "")
+                print(f"  {campaign[key]['name']} [{label}]:")
                 print(f"    https://app.gohighlevel.com/v2/location/{self.loc}/automation/workflow/{wf_id}")
+
+        # Notion sync — mark "28 Day Nurture Sequence Built" = true on the
+        # offer page if the deploy was fully successful.
+        if notion_page_id:
+            total_expected = sum(len(wf["templates"]) for wf in campaign.values())
+            full_success = (
+                self.stats["steps_saved"] == total_expected
+                and not self.stats["errors"]
+            )
+            if full_success:
+                if _notion_mark_offer_built(notion_page_id):
+                    print(f"\nNotion: marked '{NOTION_BUILT_PROPERTY}' = true on offer page {notion_page_id}")
+            else:
+                print(f"\nNotion sync skipped: deploy not fully successful "
+                      f"({self.stats['steps_saved']}/{total_expected} steps, "
+                      f"{len(self.stats['errors'])} errors)")
 
         return self.stats
 
