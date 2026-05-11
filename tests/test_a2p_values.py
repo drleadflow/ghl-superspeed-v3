@@ -99,7 +99,7 @@ class _FakeClient:
         self._cv = cv_response
         self._post = post_response if post_response is not None else {}   # GHL empty-200 on create
         self._put = put_response if put_response is not None else {"customValue": {"id": "x"}}
-    def request(self, method, path, body=None):
+    def request(self, method, path, body=None, extra_headers=None):
         self.calls.append((method, path, body))
         if method == "GET" and path.endswith("/customValues/"):
             return self._cv
@@ -208,7 +208,7 @@ def test_apply_values_records_errors():
 
 def test_apply_values_records_auth_failure():
     class _AuthFail(_FakeClient):
-        def request(self, method, path, body=None):
+        def request(self, method, path, body=None, extra_headers=None):
             self.calls.append((method, path, body))
             if method == "GET":
                 return {"customValues": []}

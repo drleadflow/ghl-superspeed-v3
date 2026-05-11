@@ -210,19 +210,25 @@ class GHLClient:
     def call_count(self) -> int:
         return self._call_count
 
-    def request(self, method: str, path: str, body: dict = None) -> Optional[dict]:
-        """Make an API request with auto-retry on 401."""
+    def request(self, method: str, path: str, body: dict = None,
+                extra_headers: dict = None) -> Optional[dict]:
+        """Make an API request with auto-retry on 401.
+
+        `extra_headers` is merged into the request headers — e.g. some backend
+        endpoints (`/locations/{id}/customValues/`) require `{"version": "2021-07-28"}`
+        and 401 with "version header was not found" without it.
+        """
         token = self.token_mgr.get_token()
-        result = self._do_request(method, path, body, token)
+        result = self._do_request(method, path, body, token, extra_headers)
 
         # Retry on auth failure
         if result is None:
             token = self.token_mgr.force_refresh()
-            result = self._do_request(method, path, body, token)
+            result = self._do_request(method, path, body, token, extra_headers)
 
         return result
 
-    def _do_request(self, method, path, body, token) -> Optional[dict]:
+    def _do_request(self, method, path, body, token, extra_headers=None) -> Optional[dict]:
         self._call_count += 1
         # Ensure token is ASCII-safe (JWT should be, but strip any stray chars)
         safe_token = token.encode('ascii', 'ignore').decode('ascii').strip()
@@ -237,6 +243,8 @@ class GHLClient:
             "Accept": "application/json",
             "User-Agent": CHROME_UA,
         }
+        if extra_headers:
+            headers.update(extra_headers)
         url = f"{BASE_URL}{path}"
         data = json.dumps(body, ensure_ascii=False).encode('utf-8') if body else None
         req = urllib.request.Request(url, data=data, headers=headers, method=method)

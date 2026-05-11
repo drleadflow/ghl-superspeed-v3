@@ -48,6 +48,9 @@ A2P_VALUE_KEYS = [
 ]
 
 _CV_SLUG_RE = re.compile(r"custom_values\.([a-zA-Z0-9_\-]+)")
+# The backend customValues endpoints reject calls without an API version header
+# ("version header was not found" -> 401). This is what the GHL UI sends.
+_CV_HEADERS = {"version": "2021-07-28"}
 
 
 def make_client(location_id, refresh_token=None):
@@ -71,7 +74,7 @@ def fetch_custom_values(client, location_id):
     Returns {slug: {"id": str, "name": str, "value": str}}.
     Raises RuntimeError if the API call fails.
     """
-    resp = client.request("GET", "/locations/%s/customValues/" % location_id)
+    resp = client.request("GET", "/locations/%s/customValues/" % location_id, extra_headers=_CV_HEADERS)
     if not isinstance(resp, dict) or resp.get("_error"):
         raise RuntimeError("Failed to fetch custom values for %s: %r" % (location_id, resp))
     items = resp.get("customValues") or resp.get("custom_values") or []
@@ -132,12 +135,14 @@ def apply_values(client, location_id, value_map, *, dry_run=False):
             res = client.request(
                 "PUT", "/locations/%s/customValues/%s" % (location_id, cur["id"]),
                 {"name": cur.get("name") or canonical_name, "value": value},
+                extra_headers=_CV_HEADERS,
             )
             bucket = "updated"
         else:
             res = client.request(
                 "POST", "/locations/%s/customValues/" % location_id,
                 {"name": canonical_name, "value": value},
+                extra_headers=_CV_HEADERS,
             )
             bucket = "created"
         if res is None:
