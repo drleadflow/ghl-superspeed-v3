@@ -75,6 +75,14 @@ def fetch_custom_values(client, location_id):
     if not isinstance(resp, dict) or resp.get("_error"):
         raise RuntimeError("Failed to fetch custom values for %s: %r" % (location_id, resp))
     items = resp.get("customValues") or resp.get("custom_values") or []
+    total = resp.get("total")
+    if total is not None and total != len(items):
+        # This internal endpoint returns everything in one shot today; if that ever
+        # changes, fail loudly rather than POST duplicates for the unseen page(s).
+        raise RuntimeError(
+            "custom values response for %s looks paginated: got %d of %d "
+            "(fetch_custom_values does not page)" % (location_id, len(items), total)
+        )
     out = {}
     for it in items:
         fk = it.get("fieldKey") or ""

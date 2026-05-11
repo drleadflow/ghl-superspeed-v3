@@ -63,6 +63,10 @@ def main(argv):
     if not isinstance(value_map, dict):
         print("ERROR: value map must be a JSON object {slug: value, ...}", file=sys.stderr)
         return 2
+    if not args.refresh_token:
+        print("NOTE: no --refresh-token / $GHL_FIREBASE_REFRESH_TOKEN given — using the cached "
+              "broker/MCP token identity (correct for DLF-agency sub-accounts; pass --refresh-token "
+              "for clients on their own agency).", file=sys.stderr)
     client = make_client(args.location_id, refresh_token=args.refresh_token)
     report = apply_values(client, args.location_id, value_map, dry_run=args.dry_run)
     _print_report(report, args.dry_run)

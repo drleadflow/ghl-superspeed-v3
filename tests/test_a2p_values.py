@@ -44,6 +44,24 @@ def test_token_manager_default_order_still_broker_first():
     assert calls == ["broker"]
 
 
+def test_token_manager_prefer_refresh_raises_when_firebase_fails():
+    # When prefer_refresh_token is on and Firebase refresh fails, it's a hard error —
+    # we must NOT fall through to a cached broker/MCP (wrong-agency) token.
+    tm = TokenManager("loc123")
+    tm.set_refresh_token("RTOKEN")
+    tm.prefer_refresh_token = True
+    calls = []
+    tm._fetch_from_broker = lambda: (calls.append("broker"), "BROKER_TOKEN")[1]
+    tm._fetch_from_mcp = lambda: (calls.append("mcp"), "MCP_TOKEN")[1]
+    tm._refresh_firebase = lambda: (calls.append("firebase"), None)[1]
+    try:
+        tm.get_token()
+        assert False, "expected RuntimeError"
+    except RuntimeError:
+        pass
+    assert calls == ["firebase"]  # did NOT consult broker/mcp
+
+
 # ── A2P_VALUE_KEYS + make_client ─────────────────────────────────────────────
 def test_a2p_value_keys_shape():
     slugs = [k[0] for k in A2P_VALUE_KEYS]
@@ -117,6 +135,21 @@ def test_fetch_custom_values_raises_on_error():
         assert False, "expected RuntimeError"
     except RuntimeError:
         pass
+
+
+def test_fetch_custom_values_raises_when_response_looks_paginated():
+    client = _FakeClient({"customValues": [_cv_item("Logo", "logo", "x")], "total": 50})
+    try:
+        fetch_custom_values(client, "LOC")
+        assert False, "expected RuntimeError"
+    except RuntimeError:
+        pass
+
+
+def test_fetch_custom_values_ok_when_total_matches():
+    client = _FakeClient({"customValues": [_cv_item("Logo", "logo", "x")], "total": 1})
+    out = fetch_custom_values(client, "LOC")
+    assert set(out.keys()) == {"logo"}
 
 
 # ── apply_values ─────────────────────────────────────────────────────────────

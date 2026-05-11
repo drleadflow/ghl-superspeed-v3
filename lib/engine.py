@@ -71,14 +71,19 @@ class TokenManager:
         if self._token and (time.time() - self._token_time) < 3000:
             return self._token
 
-        # 1b. If caller explicitly wants the refresh-token identity, use it first
-        #     (avoids a cached DLF broker/MCP token winning for a non-DLF agency location).
+        # 1b. If caller explicitly wants the refresh-token identity, use ONLY that —
+        #     never fall through to a cached DLF broker/MCP token for a non-DLF agency
+        #     location. A failed Firebase refresh here is a hard error, not a fallback.
         if self.prefer_refresh_token and self._refresh_token:
             token = self._refresh_firebase()
             if token:
                 self._token = token
                 self._token_time = time.time()
                 return token
+            raise RuntimeError(
+                f"prefer_refresh_token is set but Firebase refresh failed for "
+                f"{self.location_id} — check the supplied refresh token"
+            )
 
         # 2. Try CF Worker token broker (preferred — survives session resets)
         token = self._fetch_from_broker()
