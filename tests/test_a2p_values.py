@@ -194,6 +194,41 @@ def test_apply_values_ignores_unknown_slugs():
     assert posts[0][2]["value"] == "{{location.logo_url}}"
 
 
+# ── a2p_apply CLI (arg / file error paths; happy path covered via fake client) ─
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))
+import a2p_apply  # noqa: E402
+
+
+def test_apply_cli_missing_value_map_file_exits_2():
+    rc = a2p_apply.main(["LOC", "/no/such/file.json"])
+    assert rc == 2
+
+
+def test_apply_cli_non_object_value_map_exits_2():
+    fd, path = tempfile.mkstemp(suffix=".json")
+    os.write(fd, b"[1, 2, 3]")
+    os.close(fd)
+    try:
+        rc = a2p_apply.main(["LOC", path])
+        assert rc == 2
+    finally:
+        os.unlink(path)
+
+
+def test_apply_cli_dry_run_with_fake_client():
+    fd, path = tempfile.mkstemp(suffix=".json")
+    os.write(fd, json.dumps({"logo": "{{location.logo_url}}"}).encode())
+    os.close(fd)
+    orig = a2p_apply.make_client
+    a2p_apply.make_client = lambda loc, refresh_token=None: _FakeClient({"customValues": []})
+    try:
+        rc = a2p_apply.main(["LOC", path, "--dry-run"])
+        assert rc == 0
+    finally:
+        a2p_apply.make_client = orig
+        os.unlink(path)
+
+
 # ---- standalone runner ----
 def _run_all():
     funcs = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
