@@ -1,8 +1,28 @@
 __pycache__/
 *.pyc
 .env
+# Backup env/secret files — never commit (a past incident lost real env vars via a stray backup)
+.env.bak*
+*.bak.[0-9]*
 *.log
 results/
 runs/
 chrome-extension/
 .DS_Store
+
+# Notion API cache (per-page JSON + metadata, never commit)
+.cache/
+
+# Self-improving harness telemetry (churny local usage ledger; candidates + index stay tracked)
+.claude/metrics/bash-usage.jsonl
+# Gotcha-fixer raw capture ledger (churny; RESOLVED.md + open gotchas stay tracked)
+.claude/gotchas/raw.jsonl
+
+# Obsidian per-machine state (vault content stays tracked)
+.obsidian/workspace*
+.obsidian/cache
+.obsidian/plugins/*/data.json
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.smart-env/
+.trash/

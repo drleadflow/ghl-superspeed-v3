@@ -351,9 +351,20 @@ For MCP access: **info@doctorleadflow.com**
 
 ---
 
-## Slash commands
+## Agent harness, skills & commands
 
+This repo runs a self-improving Claude Code harness. Full map: **`.claude/HARNESS.md`**.
+
+**Skills** (`.claude/skills/`, auto-selected by Claude):
+- `ship-nurture` — build AND deploy a GHL nurture from a doc (the canonical flow).
+- `audit-location` — read-only dump / flow-map / docx-report a live GHL location.
+- `gotcha-fixer` — work the captured-failure queue; dispatches background fix agents.
+
+**Slash commands** (`.claude/commands/`, user-typed):
 - `/a2p-fill-values <url> <location_id> [--client <slug>] [--refresh-token <t>]` — populate the 18 custom values the A2P landing-page funnel + opt-in form use, from a business URL + optional vault brief; dry-run preview, then apply.
+- `/extract-offer`, `/build-sequence`, `/build-campaign-skeleton` — vault offer → deployable campaign pipeline.
+
+**Harness health:** `python3 scripts/suggest_skills.py --lint` (skill structure) and `python3 scripts/gotcha.py list` (open failures).
 
 ---
 

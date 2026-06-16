@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 scripts/a2p_scrape.py https://nursefriendwellness.com)",
+      "Bash(python3 *)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(stat:*)"
+    ]
+  }
+}
