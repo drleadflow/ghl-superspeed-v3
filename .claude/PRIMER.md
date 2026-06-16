@@ -19,12 +19,21 @@ Harness audit + setup (2026-06-16):
 - Cleanup: removed stray `.claude/skills/.claude/`; gitignored `.env.bak*`.
 
 ## Next Steps
-- Nothing committed yet (per house rule). Review + commit when ready.
+- Harness committed + pushed (`d55cbbd`) to `origin/feat/automation-dumper`
+  (clients/ excluded). To let the nightly cloud routine clone `main` directly
+  (dropping its branch-checkout step), merge `feat/automation-dumper → main`.
 - Build backlog skills as needed — see `.claude/skills/_BACKLOG.md` (top pick:
   `onboard-client`).
 
 ## Open Blockers
 None.
+
+## Nightly Routine
+Cloud /schedule routine `trig_01PgtrZd8VxSe1SSPoszkteU` runs nightly at 2am CT:
+fixes open gotchas, runs tests/lint/preflight, opens a `nightly/maintenance-*` PR
+against this branch. Manage: https://claude.ai/code/routines/trig_01PgtrZd8VxSe1SSPoszkteU
+Caveat: cloud can't see the local gotcha ledger (gitignored) — commit/push
+`.claude/gotchas/OPEN.md` for the routine to act on locally-captured gotchas.
 
 ## Session Notes
 - `audit-location` records a real latent gotcha: `build_workflow_docx.js`
