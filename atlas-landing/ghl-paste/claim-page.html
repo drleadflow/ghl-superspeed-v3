@@ -48,7 +48,7 @@
     <div class="wr-quote">"The Vitality &amp; Aesthetics Institute is on another level. Clean, modern, and medical staff are incredibly knowledgeable."<div class="wr-who">— Concierge client, Houston</div></div>
   </div>
 
-  <div class="wr-card wr-center wr-qr">
+  <div class="wr-card wr-center wr-qr" id="wrQrCard">
     <p class="wr-preview-label">On a computer?</p>
     <img class="wr-qr-img" src="https://atlas-landing-eight.vercel.app/qr-claim.png" alt="Scan to text TVAAI and claim your spot" width="190" height="190" loading="lazy">
     <p class="wr-alt"><b>Scan with your phone</b> — your text opens ready to send</p>
@@ -111,4 +111,25 @@
 #wr-claim .wr-qr-img { margin:4px auto 14px; border:1px solid var(--sand); border-radius:12px; padding:8px; background:#fff; }
 @media (max-width:599px) { #wr-claim .wr-qr-img { display:none; } }
 @media (min-width:600px) { #wr-claim h1 { font-size:36px; } }
+</style>
+
+<script>
+(function () {
+  // Desktop: move the QR card up right under the main CTA card. The SMS button
+  // stays clickable — Macs with iMessage handoff can send directly.
+  var ua = navigator.userAgent;
+  var isMobile = /iPhone|iPad|iPod|Android|Mobile|webOS|BlackBerry|Windows Phone/i.test(ua);
+  if (!isMobile) {
+    var qr = document.getElementById('wrQrCard');
+    var cta = document.getElementById('wrSmsBtn').closest('.wr-card');
+    if (qr && cta && cta.parentNode) {
+      cta.parentNode.insertBefore(qr, cta.nextSibling);
+      var lbl = qr.querySelector('.wr-preview-label');
+      if (lbl) lbl.textContent = 'Fastest on desktop — scan with your phone';
+    }
+  }
+})();
+</script>
+
+<style>
 </style>
