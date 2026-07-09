@@ -4,6 +4,8 @@ Build complete GHL workflow campaigns in seconds, not hours. Programmatic workfl
 
 **Proven: 8 workflows, 45 steps, 8 triggers deployed in 3.2 seconds.**
 
+> 📖 **Launching a client funnel?** Start with [docs/TAG-FUNNEL-PLAYBOOK.md](docs/TAG-FUNNEL-PLAYBOOK.md) — the repeatable landing-page → tag → SMS → AI-setter system (pages, workflows, tag flow, clone-for-new-client guide) with the [clickable system map](https://healthproceo-diagrams.vercel.app/?diagram=e2e-funnel-system).
+
 ---
 
 ## What This Does

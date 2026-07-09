@@ -1,0 +1,383 @@
+<!-- ══════════════════════════════════════════════════════════════════
+     WRINKLE RESET LANDING PAGE — paste into ONE GHL custom-code element
+     (full-width section, no padding). Form posts to the Vercel API and
+     tags the contact `atlas`, then redirects to the claim page.
+     CHANGE `NEXT_URL` below if your claim page path is different.
+     ══════════════════════════════════════════════════════════════════ -->
+<div id="wr-atlas">
+
+<div class="wr-stickybar" id="wrStickybar">
+  <div class="wr-sticky-price">Wrinkle Reset · <span>$9/unit</span> Botox</div>
+  <a href="#wrFormCard">See If I Qualify</a>
+</div>
+
+<div class="wr-banner">🔥 50 founding-member spots this month — one-time new client special · Houston only</div>
+
+<div class="wr-herobg">
+<div class="wr-wrap">
+
+  <div class="wr-hero">
+    <div class="wr-eyebrow">Wrinkle Reset Membership · Houston, TX</div>
+    <h1>Botox Is Botox. Stop Paying <span class="wr-gold">$14 a Unit</span> for It.</h1>
+    <p class="wr-sub">Same Allergan product as the "luxury" med spas — without the markup for marble countertops. Wrinkle Reset members pay <b>$9/unit</b> for just $9/month. Physician-led, natural results.</p>
+    <div class="wr-stars">★★★★★</div>
+    <div class="wr-trust"><b>4.9 on Google</b> · 47 reviews · Physician-led medical team</div>
+    <div class="wr-chips">
+      <span class="wr-chip"><b>MD</b> Physician-directed</span>
+      <span class="wr-chip"><b>100%</b> Authentic Botox</span>
+      <span class="wr-chip"><b>4.9★</b> on Google</span>
+    </div>
+  </div>
+
+  <div class="wr-card" id="wrFormCard">
+    <h2>See If You Qualify</h2>
+    <p class="wr-hint">Takes 20 seconds. We'll text you to confirm your spot.</p>
+    <form id="wrQualifyForm" novalidate>
+      <label for="wrFirstName">First name</label>
+      <input type="text" id="wrFirstName" placeholder="Your first name" autocomplete="given-name" required>
+      <label for="wrPhone">Mobile number</label>
+      <input type="tel" id="wrPhone" placeholder="(832) 555-0123" autocomplete="tel" inputmode="tel" required>
+      <div class="wr-error" id="wrErrorBox"></div>
+      <button class="wr-btn" id="wrSubmitBtn" type="submit">See If I Qualify →</button>
+      <p class="wr-fine">By submitting, you agree to receive text messages from The Vitality &amp; Aesthetics Institute about your request. Msg &amp; data rates may apply. Reply STOP to opt out anytime.</p>
+    </form>
+    <div class="wr-success" id="wrSuccessBox">
+      <div class="wr-check">✅</div>
+      <h3>You're in, one last step…</h3>
+      <p>Taking you to claim your spot by text — hang tight.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="wr-wrap">
+
+  <div class="wr-section">
+    <h2>Real patient. Real results.</h2>
+    <img class="wr-rounded" src="https://assets.cdn.filesafe.space/jiR5qR3g4OrMRx6BmpF2/media/6939c4b5e03e9dbc84b23935.png" alt="Before and after Botox forehead results" loading="lazy">
+    <p class="wr-ba-caption">Forehead lines, before and after — Wrinkle Reset by TVAAI, actual patient.</p>
+  </div>
+
+  <div class="wr-section">
+    <h2>What $9/month unlocks</h2>
+    <p class="wr-lead">One-time new client special for our first 50 founding members.</p>
+    <div class="wr-card">
+      <ul class="wr-included">
+        <li><b>$9/unit Botox</b> — not $12–15. Same Allergan product, 30–40% less.</li>
+        <li><b>$4/unit Dysport</b> — not $6–8, for those who prefer it.</li>
+        <li>Member pricing on everything — fillers, skincare, all of it.</li>
+        <li>Priority booking — skip the waitlist.</li>
+        <li>No contracts. Cancel anytime, no questions asked.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wr-section">
+    <h2>What would <em>your</em> treatment cost?</h2>
+    <p class="wr-lead">Tap the areas you're thinking about — we'll estimate your units and your member savings.</p>
+    <div class="wr-card">
+      <div class="wr-areas" id="wrAreaGrid"></div>
+      <div class="wr-calc-result" id="wrCalcResult" style="display:none">
+        <div class="wr-units" id="wrCalcUnits"></div>
+        <div class="wr-prices">
+          <div class="wr-p wr-typical"><b id="wrCalcTypical"></b><span>typical at $14/unit</span></div>
+          <div class="wr-p wr-member"><b id="wrCalcMember"></b><span>your price at $9/unit</span></div>
+        </div>
+        <div class="wr-save" id="wrCalcSave"></div>
+        <div class="wr-calc-cta"><a class="wr-btn" style="display:block;text-align:center;text-decoration:none" href="#wrFormCard">Lock In $9/Unit →</a></div>
+      </div>
+      <p class="wr-fine">Estimates based on typical dosing ranges. Your exact plan is set with our medical team.</p>
+    </div>
+  </div>
+
+  <div class="wr-section">
+    <h2>The math doesn't lie</h2>
+    <p class="wr-lead">Your current clinic is charging you extra for vibes. We're charging you less for results.</p>
+    <div class="wr-card">
+      <table class="wr-compare">
+        <thead>
+          <tr><th></th><th>Your current clinic</th><th class="wr-member">Wrinkle Reset</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Price per unit</td><td>$14</td><td class="wr-member">$9</td></tr>
+          <tr><td>40-unit visit</td><td>$560</td><td class="wr-member">$360</td></tr>
+          <tr><td>Membership</td><td>—</td><td class="wr-member">$9/mo</td></tr>
+          <tr class="wr-total"><td>You keep</td><td></td><td class="wr-member">$200 every visit</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="wr-section">
+    <h2>Your medical team</h2>
+    <p class="wr-lead">Every Wrinkle Reset treatment is physician-led — not a franchise chair.</p>
+    <div class="wr-card">
+      <div class="wr-provider">
+        <img src="https://assets.cdn.filesafe.space/jiR5qR3g4OrMRx6BmpF2/media/693ae41ce03e9d1a82de8ce6.webp" alt="Dr. Shirley Lima" loading="lazy">
+        <div>
+          <h3>Dr. Shirley Lima</h3>
+          <div class="wr-cred">Board-Certified Physician · Co-Founder, TVAAI</div>
+          <p>14+ years in medicine with advanced training in aesthetic procedures. Known for listening first and dosing for natural, refreshed results — never overdone.</p>
+        </div>
+      </div>
+    </div>
+    <div class="wr-card">
+      <div class="wr-provider">
+        <img src="https://assets.cdn.filesafe.space/jiR5qR3g4OrMRx6BmpF2/media/693ae41ced957f1eb30308e5.webp" alt="Dr. Phillip Singer" loading="lazy">
+        <div>
+          <h3>Dr. Phillip Singer, DO</h3>
+          <div class="wr-cred">Board-Certified Physician · Advanced Injector Training</div>
+          <p>Advanced neurotoxin and filler training from the Esthetic Skin Institute, with deep expertise in facial anatomy and injection technique for natural, long-lasting results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wr-section">
+    <h2>What members say</h2>
+    <div class="wr-quote"><b>Comfortable from minute one</b>"Dr. Lima and the entire team made me feel comfortable from the moment I walked in."<div class="wr-who">— Houston patient</div></div>
+    <div class="wr-quote"><b>On another level</b>"The Vitality &amp; Aesthetics Institute is on another level. Clean, modern, and medical staff are incredibly knowledgeable."<div class="wr-who">— Concierge client, Houston</div></div>
+    <div class="wr-quote"><b>Like a brand new person</b>"Natural-looking results. I came in nervous and left feeling like a brand new person."<div class="wr-who">— Wellness member, Houston</div></div>
+  </div>
+
+  <div class="wr-section">
+    <h2>How it works</h2>
+    <div class="wr-step"><div class="wr-num">1</div><div><b>Check your spot</b><span>Enter your name and number — we hold your founding-member pricing.</span></div></div>
+    <div class="wr-step"><div class="wr-num">2</div><div><b>Text with our Houston team</b><span>One quick text confirms your goals and books your visit.</span></div></div>
+    <div class="wr-step"><div class="wr-num">3</div><div><b>Get your Wrinkle Reset</b><span>Your plan is mapped to your face — in and out of our Galleria-area clinic in under an hour.</span></div></div>
+  </div>
+
+  <div class="wr-cta2">
+    <a href="#wrFormCard">See If I Qualify →</a>
+  </div>
+
+  <div class="wr-section">
+    <h2>Frequently asked questions</h2>
+    <details><summary>How does the $9/unit membership work?</summary><p>The Wrinkle Reset Membership is $9/month and locks in $9/unit Botox and $4/unit Dysport at every visit — versus the $12–15/unit most Houston med spas charge. On a typical 40-unit visit, you keep $200. This founding-member pricing is a one-time new client special.</p></details>
+    <details><summary>Am I locked into a contract?</summary><p>No. There are no contracts — cancel anytime, no questions asked. The membership exists so you keep member pricing on Botox, Dysport, fillers, and skincare for as long as you want it.</p></details>
+    <details><summary>What if I prefer Dysport?</summary><p>Members get Dysport at $4/unit (typically $6–8 elsewhere). Your provider will recommend the right product for your face and goals at your visit.</p></details>
+    <details><summary>How many units will I need?</summary><p>Most first visits cover the forehead, frown lines, and crow's feet — typically 35–65 units total. Use the calculator above for your areas; your exact plan is set by our medical team before a single unit is placed.</p></details>
+    <details><summary>Will I look natural?</summary><p>That's the entire philosophy here. Dosing is mapped to how your face actually moves. Patients tell us people notice they look rested — but can't pinpoint why.</p></details>
+    <details><summary>Is it real Botox?</summary><p>Yes — Botox is Botox. It comes from the same manufacturer (Allergan) whether you're at a "luxury" Galleria med spa or here. The only difference is the markup. You're not paying for better Botox at those fancy places — you're paying for their waiting room.</p></details>
+    <details><summary>Does it hurt? What's the downtime?</summary><p>A quick pinch, over in seconds — the needles are extremely fine. Virtually no downtime; most patients go straight back to their day.</p></details>
+    <details><summary>How long do results last?</summary><p>Initial smoothing starts within days, full results settle around 2 weeks, and most patients hold results 3–4 months.</p></details>
+  </div>
+
+  <div class="wr-section">
+    <h2>Visit us in Houston</h2>
+    <iframe class="wr-map" src="https://www.google.com/maps?q=2603+Augusta+Dr+Suite+1450+Houston+TX+77057&output=embed" loading="lazy" title="TVAAI location map"></iframe>
+  </div>
+
+</div>
+
+<div class="wr-footer">
+  The Vitality &amp; Aesthetics Institute · 2603 Augusta Dr Suite 1450, Houston TX<br>
+  4.9★ on Google (47 reviews) · Mon–Fri 9–5 · (832) 962-4455<br>
+  Individual results may vary. Botox is a prescription treatment; candidacy confirmed by our medical team.
+</div>
+
+</div>
+
+<style>
+#wr-atlas {
+  --cream:#FCFAF4; --cream-deep:#FDF3DC; --sand:#EADFC9; --gold:#C9A44A;
+  --gold-deep:#8A6D2A; --brown:#2A211A; --taupe:#6E6155; --green:#34C759; --green-deep:#2AA84A;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--cream); color: var(--brown); line-height: 1.5; -webkit-font-smoothing: antialiased;
+}
+#wr-atlas * { margin:0; padding:0; box-sizing:border-box; }
+#wr-atlas img { max-width:100%; height:auto; display:block; }
+#wr-atlas h1, #wr-atlas h2, #wr-atlas h3 { font-weight:800; }
+#wr-atlas .wr-banner { background:var(--brown); color:var(--cream-deep); text-align:center; font-size:14px; font-weight:600; padding:10px 16px; }
+#wr-atlas .wr-stickybar { position:fixed; top:0; left:0; right:0; background:rgba(252,250,244,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--sand); display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 16px; z-index:9999; transform:translateY(-110%); transition:transform .25s ease; }
+#wr-atlas .wr-stickybar.wr-show { transform:translateY(0); }
+#wr-atlas .wr-sticky-price { font-weight:800; font-size:15px; }
+#wr-atlas .wr-sticky-price span { color:var(--gold-deep); }
+#wr-atlas .wr-stickybar a { background:var(--green); color:#fff; text-decoration:none; font-weight:700; font-size:14px; border-radius:10px; padding:10px 16px; white-space:nowrap; }
+#wr-atlas .wr-wrap { max-width:560px; margin:0 auto; padding:0 20px; }
+#wr-atlas .wr-herobg { background:linear-gradient(180deg, rgba(252,250,244,.94) 0%, rgba(252,250,244,.90) 45%, rgba(252,250,244,.96) 82%, var(--cream) 100%), url('https://atlas-landing-eight.vercel.app/hero-bg.jpg') center 30%/cover no-repeat; padding-bottom:18px; }
+#wr-atlas .wr-hero { text-align:center; padding:34px 0 8px; }
+#wr-atlas .wr-eyebrow { display:inline-block; background:var(--cream-deep); border:1px solid var(--sand); color:var(--gold-deep); font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; padding:6px 14px; margin-bottom:18px; }
+#wr-atlas h1 { font-size:31px; line-height:1.15; letter-spacing:-.01em; margin-bottom:12px; }
+#wr-atlas .wr-gold { color:var(--gold-deep); }
+#wr-atlas .wr-sub { color:var(--taupe); font-size:17px; max-width:470px; margin:0 auto 10px; }
+#wr-atlas .wr-stars { color:var(--gold); font-size:15px; letter-spacing:2px; }
+#wr-atlas .wr-trust { font-size:13.5px; color:var(--taupe); margin:10px 0 22px; }
+#wr-atlas .wr-trust b { color:var(--brown); }
+#wr-atlas .wr-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0 0 24px; }
+#wr-atlas .wr-chip { background:#fff; border:1px solid var(--sand); border-radius:999px; font-size:12.5px; font-weight:600; padding:7px 13px; }
+#wr-atlas .wr-chip b { color:var(--gold-deep); }
+#wr-atlas .wr-card { background:#fff; border:1px solid var(--sand); border-radius:18px; box-shadow:0 8px 30px rgba(42,33,26,.07); padding:26px 22px; margin-bottom:14px; }
+#wr-atlas .wr-card h2 { font-size:19px; text-align:center; margin-bottom:4px; }
+#wr-atlas .wr-hint { text-align:center; color:var(--taupe); font-size:14px; margin-bottom:18px; }
+#wr-atlas label { display:block; font-size:13px; font-weight:600; margin:14px 0 6px; }
+#wr-atlas input[type=text], #wr-atlas input[type=tel] { width:100%; font-size:17px; padding:14px 16px; border:1.5px solid var(--sand); border-radius:12px; background:var(--cream); color:var(--brown); outline:none; transition:border-color .15s; }
+#wr-atlas input:focus { border-color:var(--gold); background:#fff; }
+#wr-atlas .wr-btn { width:100%; margin-top:20px; background:var(--green); color:#fff; font-size:18px; font-weight:700; border:none; border-radius:14px; padding:17px; cursor:pointer; box-shadow:0 6px 18px rgba(52,199,89,.35); }
+#wr-atlas .wr-btn:hover { background:var(--green-deep); }
+#wr-atlas .wr-btn:disabled { opacity:.6; cursor:wait; }
+#wr-atlas .wr-fine { font-size:11.5px; color:var(--taupe); text-align:center; margin-top:12px; line-height:1.45; }
+#wr-atlas .wr-error { display:none; background:#fdf0ef; border:1px solid #f0c4c0; color:#b3402f; font-size:14px; border-radius:10px; padding:10px 14px; margin-top:14px; text-align:center; }
+#wr-atlas .wr-success { display:none; text-align:center; padding:18px 6px; }
+#wr-atlas .wr-check { font-size:44px; }
+#wr-atlas .wr-success h3 { font-size:20px; margin:10px 0 6px; }
+#wr-atlas .wr-success p { color:var(--taupe); font-size:15px; }
+#wr-atlas .wr-section { padding:26px 0 6px; }
+#wr-atlas .wr-section > h2 { font-size:22px; text-align:center; margin-bottom:6px; }
+#wr-atlas .wr-lead { text-align:center; color:var(--taupe); font-size:15px; margin-bottom:18px; }
+#wr-atlas .wr-ba-caption { text-align:center; color:var(--taupe); font-size:13px; margin-top:8px; }
+#wr-atlas .wr-rounded { border-radius:16px; border:1px solid var(--sand); }
+#wr-atlas .wr-areas { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+#wr-atlas .wr-area { position:relative; }
+#wr-atlas .wr-area input { position:absolute; opacity:0; pointer-events:none; }
+#wr-atlas .wr-area label { display:flex; align-items:center; gap:10px; margin:0; background:var(--cream); border:1.5px solid var(--sand); border-radius:12px; padding:8px 10px; font-size:13.5px; font-weight:600; cursor:pointer; transition:border-color .12s, background .12s; }
+#wr-atlas .wr-area label img { width:44px; height:44px; border-radius:999px; border:1px solid var(--sand); flex-shrink:0; }
+#wr-atlas .wr-area label em { font-style:normal; }
+#wr-atlas .wr-area label span { display:block; font-weight:400; color:var(--taupe); font-size:12px; }
+#wr-atlas .wr-area input:checked + label { border-color:var(--gold); background:var(--cream-deep); }
+#wr-atlas .wr-area input:checked + label img { border-color:var(--gold); }
+#wr-atlas .wr-calc-result { margin-top:16px; background:var(--cream-deep); border:1px solid var(--sand); border-radius:14px; padding:16px; text-align:center; }
+#wr-atlas .wr-units { font-size:15px; color:var(--taupe); }
+#wr-atlas .wr-prices { display:flex; justify-content:center; gap:24px; margin:10px 0 6px; }
+#wr-atlas .wr-p b { display:block; font-size:21px; }
+#wr-atlas .wr-p span { font-size:12px; color:var(--taupe); }
+#wr-atlas .wr-p.wr-member b { color:var(--gold-deep); }
+#wr-atlas .wr-p.wr-typical b { color:var(--taupe); text-decoration:line-through; }
+#wr-atlas .wr-save { font-weight:800; color:var(--green-deep); font-size:16px; }
+#wr-atlas .wr-calc-cta { margin-top:14px; }
+#wr-atlas table.wr-compare { width:100%; border-collapse:collapse; font-size:14.5px; }
+#wr-atlas table.wr-compare th, #wr-atlas table.wr-compare td { padding:11px 8px; text-align:center; border-bottom:1px solid var(--cream-deep); }
+#wr-atlas table.wr-compare th:first-child, #wr-atlas table.wr-compare td:first-child { text-align:left; color:var(--taupe); font-weight:500; }
+#wr-atlas table.wr-compare thead th { font-size:13px; }
+#wr-atlas table.wr-compare thead th.wr-member { color:var(--gold-deep); }
+#wr-atlas table.wr-compare td.wr-member { font-weight:800; color:var(--gold-deep); }
+#wr-atlas table.wr-compare tr.wr-total td { font-weight:800; border-bottom:none; }
+#wr-atlas table.wr-compare tr.wr-total td.wr-member { color:var(--green-deep); }
+#wr-atlas .wr-provider { display:flex; gap:16px; align-items:flex-start; }
+#wr-atlas .wr-provider img { width:92px; height:92px; object-fit:cover; border-radius:14px; border:1px solid var(--sand); flex-shrink:0; }
+#wr-atlas .wr-provider h3 { font-size:17px; margin-bottom:2px; }
+#wr-atlas .wr-cred { color:var(--gold-deep); font-size:12.5px; font-weight:700; margin-bottom:6px; }
+#wr-atlas .wr-provider p { font-size:14px; color:var(--taupe); }
+#wr-atlas .wr-step { display:flex; gap:14px; align-items:flex-start; margin-bottom:16px; }
+#wr-atlas .wr-num { flex:0 0 32px; height:32px; background:var(--cream-deep); border:1px solid var(--sand); color:var(--gold-deep); font-weight:700; border-radius:999px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+#wr-atlas .wr-step b { display:block; font-size:15.5px; }
+#wr-atlas .wr-step span { color:var(--taupe); font-size:14.5px; }
+#wr-atlas .wr-quote { background:#fff; border:1px solid var(--sand); border-radius:14px; padding:18px; margin-bottom:12px; font-size:15px; }
+#wr-atlas .wr-quote b { display:block; font-size:14px; color:var(--gold-deep); margin-bottom:6px; }
+#wr-atlas .wr-who { color:var(--taupe); font-size:13px; margin-top:8px; }
+#wr-atlas details { background:#fff; border:1px solid var(--sand); border-radius:12px; margin-bottom:10px; padding:0 16px; }
+#wr-atlas details summary { cursor:pointer; font-weight:600; font-size:15px; padding:14px 0; list-style:none; position:relative; }
+#wr-atlas details summary::after { content:"+"; position:absolute; right:2px; color:var(--gold-deep); font-weight:700; }
+#wr-atlas details[open] summary::after { content:"–"; }
+#wr-atlas details p { padding:0 0 14px; font-size:14.5px; color:var(--taupe); }
+#wr-atlas .wr-cta2 { text-align:center; padding:12px 0 26px; }
+#wr-atlas .wr-cta2 a { display:inline-block; background:var(--green); color:#fff; text-decoration:none; font-weight:700; font-size:17px; border-radius:14px; padding:16px 34px; box-shadow:0 6px 18px rgba(52,199,89,.35); }
+#wr-atlas .wr-map { border:0; width:100%; height:220px; border-radius:16px; }
+#wr-atlas .wr-footer { text-align:center; color:var(--taupe); font-size:12.5px; padding:24px 20px 40px; border-top:1px solid var(--sand); margin-top:24px; line-height:1.7; }
+@media (min-width:600px) {
+  #wr-atlas h1 { font-size:38px; }
+  #wr-atlas .wr-areas { grid-template-columns:1fr 1fr 1fr; }
+}
+</style>
+
+<script>
+(function () {
+  // Posts straight to the GHL inbound-webhook workflow (creates contact + tags).
+  var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/jiR5qR3g4OrMRx6BmpF2/webhook-trigger/84bb021f-3cc7-4db9-bd43-46a640396d91';
+  var ASSET_BASE = 'https://atlas-landing-eight.vercel.app';
+  var NEXT_URL = 'https://tvaa.doctorleadflow.com/botoxoffer'; // ← CHANGE to your claim page path
+  var MEMBER_RATE = 9, TYPICAL_RATE = 14;
+
+  var AREAS = [
+    { id:'frown', name:'Frown Lines (11s)', min:15, max:25 },
+    { id:'forehead', name:'Forehead Lines', min:10, max:20 },
+    { id:'crows', name:"Crow's Feet", min:10, max:24 },
+    { id:'brow', name:'Brow Lift', min:4, max:10 },
+    { id:'bunny', name:'Bunny Lines', min:5, max:10 },
+    { id:'gummy', name:'Gummy Smile', min:4, max:8 },
+    { id:'lip', name:'Lip Flip', min:4, max:6 },
+    { id:'chin', name:'Chin Dimpling', min:2, max:6 },
+    { id:'mouth', name:'Mouth Corners', min:6, max:12 },
+    { id:'masseter', name:'Jaw Slimming', min:40, max:80 },
+    { id:'neck', name:'Neck Bands', min:60, max:80 },
+    { id:'trap', name:'Trapezius (Traptox)', min:100, max:200 }
+  ];
+
+  var grid = document.getElementById('wrAreaGrid');
+  AREAS.forEach(function (a) {
+    var div = document.createElement('div');
+    div.className = 'wr-area';
+    div.innerHTML =
+      '<input type="checkbox" id="wa-' + a.id + '" data-min="' + a.min + '" data-max="' + a.max + '">' +
+      '<label for="wa-' + a.id + '">' +
+      '<img src="' + ASSET_BASE + '/areas/' + a.id + '.png" alt="' + a.name + '" loading="lazy" width="44" height="44">' +
+      '<em>' + a.name + '<span>' + a.min + '–' + a.max + ' units</span></em></label>';
+    grid.appendChild(div);
+  });
+
+  var resultBox = document.getElementById('wrCalcResult');
+  grid.addEventListener('change', function () {
+    var checked = Array.prototype.slice.call(grid.querySelectorAll('input:checked'));
+    if (!checked.length) { resultBox.style.display = 'none'; return; }
+    var min = 0, max = 0;
+    checked.forEach(function (el) { min += Number(el.dataset.min); max += Number(el.dataset.max); });
+    var mid = Math.round((min + max) / 2);
+    var fmt = function (n) { return '$' + n.toLocaleString('en-US'); };
+    document.getElementById('wrCalcUnits').textContent =
+      'Estimated ' + min + '–' + max + ' units for your ' + checked.length + ' area' + (checked.length > 1 ? 's' : '');
+    document.getElementById('wrCalcMember').textContent = fmt(mid * MEMBER_RATE);
+    document.getElementById('wrCalcTypical').textContent = fmt(mid * TYPICAL_RATE);
+    document.getElementById('wrCalcSave').textContent = 'You save ~' + fmt(mid * (TYPICAL_RATE - MEMBER_RATE)) + ' per visit';
+    resultBox.style.display = 'block';
+  });
+
+  var bar = document.getElementById('wrStickybar');
+  var hero = document.getElementById('wrFormCard');
+  window.addEventListener('scroll', function () {
+    bar.classList.toggle('wr-show', hero.getBoundingClientRect().bottom < 0);
+  }, { passive: true });
+
+  var form = document.getElementById('wrQualifyForm');
+  var btn = document.getElementById('wrSubmitBtn');
+  var errorBox = document.getElementById('wrErrorBox');
+  function showError(msg) { errorBox.textContent = msg; errorBox.style.display = 'block'; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+    var firstName = document.getElementById('wrFirstName').value.trim();
+    var phone = document.getElementById('wrPhone').value.trim();
+    var digits = phone.replace(/\D/g, '');
+    if (firstName.length < 2) return showError('Please enter your first name.');
+    if (digits.length !== 10 && !(digits.length === 11 && digits.charAt(0) === '1')) {
+      return showError('Please enter a valid US mobile number.');
+    }
+    btn.disabled = true;
+    btn.textContent = 'Checking…';
+    var normalized = digits.length === 11 ? '+' + digits : '+1' + digits;
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name: firstName,
+        phone: normalized,
+        source: 'atlas-landing-page',
+        tag: 'atlas',
+        offer: 'wrinkle-reset-founding-membership'
+      })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Something went wrong. Please try again.');
+        form.style.display = 'none';
+        document.getElementById('wrSuccessBox').style.display = 'block';
+        setTimeout(function () { window.location.href = NEXT_URL; }, 1400);
+      })
+      .catch(function (err) {
+        showError(err.message);
+        btn.disabled = false;
+        btn.textContent = 'See If I Qualify →';
+      });
+  });
+})();
+</script>
