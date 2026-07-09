@@ -1,7 +1,8 @@
 <!-- ══════════════════════════════════════════════════════════════════
-     TVAAI T-SHAPE CLAIM PAGE (v2 — desktop QR moved up into the CTA spot)
+     TVAAI T-SHAPE CLAIM PAGE (v3 — desktop = button + QR together)
      Paste into ONE GHL Custom JS/HTML element at /tshapeoffer.
-     Desktop: QR replaces the SMS button + copy says "scan" not "tap".
+     Desktop: SMS button stays clickable (Mac iMessage handoff) AND the QR
+     shows directly beneath it — identical behavior to the WR claim page.
      ══════════════════════════════════════════════════════════════════ -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -108,15 +109,16 @@ fbq('track', 'PageView');
     // Android + every other mobile OS: RFC 5724 standard
     smsBtn.href = 'sms:' + PHONE + '?body=' + encodeURIComponent(body);
   } else {
-    // desktop/tablet without SMS: QR the phone can scan (SMSTO opens Messages pre-filled on iPhone & Android)
-    smsBtn.style.display = 'none';
-    document.getElementById('smsHint').textContent = '';
+    // Desktop: keep the button clickable (Macs with iMessage handoff can send it)
+    // AND show the QR right below it — same behavior as the Wrinkle Reset claim page.
+    smsBtn.href = 'sms:' + PHONE + '&body=' + encodeURIComponent(body);
     var qr = document.getElementById('qrBlock');
     qr.style.display = 'block';
-    qr.style.margin = '0 0 18px';
-    smsBtn.parentNode.insertBefore(qr, smsBtn); // desktop: QR takes the button's spot
-    var sub = document.querySelector('#mdw-claim .sub');
-    if (sub) sub.innerHTML = 'Your request is in! <strong>Scan the code below</strong> with your phone — your text opens ready to send. Hitting <strong>send</strong> is what <strong>claims your spot</strong> and connects you with our Houston team instantly.';
+    qr.style.margin = '14px 0 18px';
+    var hint = document.getElementById('smsHint');
+    hint.parentNode.insertBefore(qr, hint.nextSibling); // QR directly under button+hint
+    var lbl = qr.querySelector('.plabel');
+    if (lbl) lbl.textContent = 'Fastest on desktop — scan with your phone';
   }
   smsBtn.addEventListener('click', function(){
     if (window.fbq) fbq('trackCustom', 'BridgeClaimClick', {offer: 't-shape', method: 'sms'});
