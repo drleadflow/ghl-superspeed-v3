@@ -2,8 +2,7 @@
      T-SHAPE LANDING PAGE — paste into ONE GHL custom-code element
      (full-width section, no padding). Suggested path: /tshape
      Form posts to the T-Shape inbound webhook → contact + `tshape-qualify`
-     → redirects to the claim page. CHANGE `NEXT_URL` if your claim page
-     path differs (default: /claim-t-shape).
+     → redirects to the live claim page at /tshapeoffer.
      ══════════════════════════════════════════════════════════════════ -->
 <div id="ts-atlas">
 
@@ -236,7 +235,7 @@
 <script>
 (function () {
   var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/jiR5qR3g4OrMRx6BmpF2/webhook-trigger/iWzY2syI834lAz0R76B0';
-  var NEXT_URL = 'https://tvaa.doctorleadflow.com/claim-t-shape'; // ← CHANGE if your claim page path differs
+  var NEXT_URL = 'https://tvaa.doctorleadflow.com/tshapeoffer'; // the live T-Shape claim page
 
   var bar = document.getElementById('tsStickybar');
   var hero = document.getElementById('tsFormCard');
