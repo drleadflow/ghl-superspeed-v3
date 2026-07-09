@@ -1,0 +1,126 @@
+<!-- ══════════════════════════════════════════════════════════════════
+     TVAAI T-SHAPE CLAIM PAGE (v2 — desktop QR moved up into the CTA spot)
+     Paste into ONE GHL Custom JS/HTML element at /tshapeoffer.
+     Desktop: QR replaces the SMS button + copy says "scan" not "tap".
+     ══════════════════════════════════════════════════════════════════ -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '25299631406308601');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=25299631406308601&ev=PageView&noscript=1"></noscript>
+<style>
+#mdw-claim {--ink:#2A211A; --ink2:#6E6155; --accent:#C9A44A; --ground:#FCFAF4; --line:#EADFC9; --imsg:#34C759; --msgr:#0084FF;}
+#mdw-claim, #mdw-claim * {box-sizing:border-box; margin:0;}
+#mdw-claim {background:var(--ground); color:var(--ink); min-height:100vh; display:flex; align-items:center; justify-content:center;
+  font:17px/1.55 "Seravek","Avenir Next",system-ui,-apple-system,sans-serif; padding:24px;}
+#mdw-claim .card {max-width:420px; width:100%; text-align:center;}
+#mdw-claim .logoband {background:#000; border-radius:12px; padding:10px 14px; margin:0 auto 16px; display:flex; justify-content:center;}
+#mdw-claim .logoband img {max-width:220px; width:100%; height:auto; display:block;}
+#mdw-claim .scarcity {display:inline-block; background:#FDF3DC; color:#8A6D2A; border:1px solid #C9A44A55; font-size:13px; font-weight:650;
+  padding:5px 14px; border-radius:99px; margin-bottom:14px;}
+#mdw-claim h1 {font-size:26px; line-height:1.2; font-weight:650; letter-spacing:-0.015em; margin-bottom:10px; text-wrap:balance;}
+#mdw-claim .sub {color:var(--ink2); font-size:15.5px; margin-bottom:26px;}
+#mdw-claim .sub strong {color:#8A6D2A; font-weight:650;}
+#mdw-claim .btn {display:flex; align-items:center; justify-content:center; gap:10px; width:100%;
+  color:#fff; text-decoration:none; font-weight:650; font-size:17px;
+  padding:16px 20px; border-radius:12px; margin-bottom:10px;}
+#mdw-claim .btn.sms {background:var(--imsg); box-shadow:0 4px 14px rgba(52,199,89,.3);}
+#mdw-claim .btn.msgr {background:var(--msgr); box-shadow:0 4px 14px rgba(0,132,255,.25); font-size:15px; padding:13px 18px;}
+#mdw-claim .hint {font-size:13px; color:var(--ink2); margin-top:6px;}
+#mdw-claim .preview {margin:0 0 14px;}
+#mdw-claim .preview .plabel {font-size:11.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink2); font-weight:650; margin-bottom:6px;}
+#mdw-claim .preview .bubble {display:inline-block; background:#E9E9EB; color:#111; font-size:15px;
+  padding:10px 16px; border-radius:20px; border-bottom-left-radius:6px; text-align:left; max-width:320px;}
+#mdw-claim .alt {margin-top:26px; padding-top:18px; border-top:1px solid var(--line); font-size:14px; color:var(--ink2);}
+#mdw-claim .alt a {color:#8A6D2A; font-weight:600;}
+#mdw-claim .trust {margin-top:20px; font-size:12.5px; color:var(--ink2);}
+#mdw-claim .results {margin-top:22px;}
+#mdw-claim .results h3 {font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink2); font-weight:650; margin-bottom:10px;}
+#mdw-claim .results img {width:100%; border-radius:10px; border:1px solid var(--line); display:block;}
+#mdw-claim .ba-cap {font-size:12px; color:var(--ink2); margin-top:8px;}
+#mdw-claim .review {background:#fff; border:1px solid var(--line); border-radius:10px; padding:13px 16px;
+  font-size:13.5px; color:var(--ink2); text-align:left; margin-top:12px; line-height:1.5;}
+#mdw-claim .review b {color:var(--ink); font-weight:600;}
+#mdw-claim .stars {font-size:14px; color:var(--ink2); margin:16px 0 2px;}
+#mdw-claim .ratingrow {margin:18px 0 4px;}
+#mdw-claim .ratingrow .big {font-size:22px; letter-spacing:2px; color:#C9A44A;}
+#mdw-claim .ratingrow .lbl {font-size:14px; color:var(--ink2); margin-top:2px; font-weight:600;}
+#mdw-claim .ratingrow .lbl b {color:var(--ink);}
+#mdw-claim .chips {display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:12px 0 4px;}
+#mdw-claim .chip {background:#fff; border:1px solid #C9A44A55; color:var(--ink); font-size:12.5px;
+  font-weight:600; padding:6px 12px; border-radius:99px;}
+#mdw-claim .chip::before {content:"★ "; color:#C9A44A;}
+</style>
+<div id="mdw-claim">
+<div class="card">
+  <div class="logoband"><img src="https://mdw-live-report.vercel.app/tvaai/img/logo.jpg" alt="The Vitality & Aesthetics Institute" width="280"></div>
+  <div class="scarcity">🔥 Only 7 spots left at this intro pricing</div>
+  <h1>One last step to claim your $199 T-Shape Body Sculpting offer</h1>
+  <p class="sub">Your request is in! Tap below and hit <strong>send</strong> on the message — that's what <strong>claims your spot</strong> and connects you with our Houston team instantly.</p>
+  <div class="preview"><div class="plabel">You'll send this — one tap</div>
+    <div class="bubble">Hi TVAAI! Claiming my T-Shape body sculpting special ✨</div></div>
+  <a class="btn sms" id="smsBtn" href="#">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 5.94 2 10.8c0 2.8 1.49 5.29 3.81 6.9-.13 1.07-.58 2.42-1.55 3.42-.19.2-.04.53.23.5 2.2-.23 3.87-1.14 4.96-1.99.81.19 1.66.29 2.55.29 5.52 0 10-3.94 10-8.8S17.52 2 12 2z"/></svg>
+    <span>Text Us to Claim Your Offer</span>
+  </a>
+  <p class="hint" id="smsHint">Opens your Messages app with the message ready — just tap send.</p>
+  <div class="results"><h3>Real patient results</h3>
+    <img src="https://mdw-live-report.vercel.app/tvaai/img/tshape-ba-1.jpg" alt="T-Shape body sculpting before and after at The Vitality and Aesthetics Institute">
+    <div class="ba-cap">Before (left) and after (right) — T-Shape body sculpting by TVAAI, actual patient.</div>
+    <img src="https://mdw-live-report.vercel.app/tvaai/img/tshape-ba-2.jpg" alt="T-Shape body sculpting stomach before and after at TVAAI" style="margin-top:10px">
+    <div class="ba-cap">Before (top) and after (bottom) — actual patient.</div>
+  </div>
+  <div class="ratingrow"><div class="big">★★★★★</div><div class="lbl"><b>4.9</b> on Google · 47 reviews</div></div>
+  <div class="chips">
+    <span class="chip">comfortable from the moment I walked in</span>
+    <span class="chip">natural-looking results</span>
+    <span class="chip">incredibly knowledgeable staff</span>
+    <span class="chip">on another level</span>
+  </div>
+  <div class="review">"Dr. Lima and the entire team made me feel comfortable from the moment I walked in." — <b>Houston patient</b></div>
+  <div class="review">"The Vitality &amp; Aesthetics Institute is on another level. Clean, modern, and medical staff are incredibly knowledgeable." — <b>Concierge client</b></div>
+  <div class="review">"I came in for hormone optimization and IV therapy and feel like a brand new person." — <b>Wellness member</b></div>
+  <div id="qrBlock" style="display:none">
+    <div class="plabel" style="font-size:11.5px;text-transform:uppercase;letter-spacing:0.07em;color:var(--ink2);font-weight:650;margin:6px 0 8px">Scan with your phone — your text opens ready to send</div>
+    <img src="https://mdw-live-report.vercel.app/tvaai/img/qr-t-shape.png" alt="Scan to claim by text" width="180" height="180" style="border:1px solid var(--line);border-radius:12px">
+    <div style="font-size:13px;color:var(--ink2);margin-top:8px">or text us directly: <b style="color:var(--ink)">+1 (832) 230-2418</b></div>
+  </div>
+  <div class="alt">Prefer to talk it through?<br><a href="tel:+18329624455">Call us at (832) 962-4455</a></div>
+  <p class="trust">The Vitality &amp; Aesthetics Institute · 2603 Augusta Dr Suite 1450, Houston TX<br>4.9★ on Google (47 reviews) · Mon–Fri 9–5</p>
+</div>
+<script>
+(function () {
+  var PHONE = '+18322302418';
+  var ua = navigator.userAgent;
+  var isIOS = /iPhone|iPad|iPod/.test(ua);
+  var isAndroid = /Android/.test(ua);
+  var isMobile = isIOS || isAndroid || /Mobile|webOS|BlackBerry|Windows Phone/i.test(ua);
+  var body = 'Hi TVAAI! Claiming my T-Shape body sculpting special ✨';
+  var smsBtn = document.getElementById('smsBtn');
+  if (isIOS) {
+    smsBtn.href = 'sms:' + PHONE + '&body=' + encodeURIComponent(body);
+  } else if (isMobile) {
+    // Android + every other mobile OS: RFC 5724 standard
+    smsBtn.href = 'sms:' + PHONE + '?body=' + encodeURIComponent(body);
+  } else {
+    // desktop/tablet without SMS: QR the phone can scan (SMSTO opens Messages pre-filled on iPhone & Android)
+    smsBtn.style.display = 'none';
+    document.getElementById('smsHint').textContent = '';
+    var qr = document.getElementById('qrBlock');
+    qr.style.display = 'block';
+    qr.style.margin = '0 0 18px';
+    smsBtn.parentNode.insertBefore(qr, smsBtn); // desktop: QR takes the button's spot
+    var sub = document.querySelector('#mdw-claim .sub');
+    if (sub) sub.innerHTML = 'Your request is in! <strong>Scan the code below</strong> with your phone — your text opens ready to send. Hitting <strong>send</strong> is what <strong>claims your spot</strong> and connects you with our Houston team instantly.';
+  }
+  smsBtn.addEventListener('click', function(){
+    if (window.fbq) fbq('trackCustom', 'BridgeClaimClick', {offer: 't-shape', method: 'sms'});
+  });
+})();
+</script>
+</div>
