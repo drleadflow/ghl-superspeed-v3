@@ -1,0 +1,291 @@
+<!-- ══════════════════════════════════════════════════════════════════
+     T-SHAPE LANDING PAGE — paste into ONE GHL custom-code element
+     (full-width section, no padding). Suggested path: /tshape
+     Form posts to the T-Shape inbound webhook → contact + `tshape-qualify`
+     → redirects to the claim page. CHANGE `NEXT_URL` if your claim page
+     path differs (default: /claim-t-shape).
+     ══════════════════════════════════════════════════════════════════ -->
+<div id="ts-atlas">
+
+<div class="wr-stickybar" id="tsStickybar">
+  <div class="wr-sticky-price">T-Shape Body Sculpting · <span>$199</span> intro</div>
+  <a href="#tsFormCard">See If I Qualify</a>
+</div>
+
+<div class="wr-banner">🔥 Only 7 spots left at this intro pricing · Houston only</div>
+
+<div class="wr-herobg">
+<div class="wr-wrap">
+
+  <div class="wr-hero">
+    <div class="wr-eyebrow">T-Shape 2 Body Sculpting · Houston, TX</div>
+    <h1>Melt Stubborn Fat &amp; Tighten Skin — <span class="wr-gold">No Surgery. $199.</span></h1>
+    <p class="wr-sub">The T-Shape 2 combines four technologies in one comfortable 45-minute session — targeted fat reduction, skin tightening, and contouring with <b>zero downtime</b>. Physician-led, natural results.</p>
+    <div class="wr-stars">★★★★★</div>
+    <div class="wr-trust"><b>4.9 on Google</b> · 47 reviews · Physician-led medical team</div>
+    <div class="wr-chips">
+      <span class="wr-chip"><b>MD</b> Physician-directed</span>
+      <span class="wr-chip"><b>45</b> min per session</span>
+      <span class="wr-chip"><b>0</b> downtime</span>
+    </div>
+  </div>
+
+  <div class="wr-card" id="tsFormCard">
+    <h2>See If You Qualify</h2>
+    <p class="wr-hint">Takes 20 seconds. We'll text you to confirm your spot.</p>
+    <form id="tsQualifyForm" novalidate>
+      <label for="tsFirstName">First name</label>
+      <input type="text" id="tsFirstName" placeholder="Your first name" autocomplete="given-name" required>
+      <label for="tsPhone">Mobile number</label>
+      <input type="tel" id="tsPhone" placeholder="(832) 555-0123" autocomplete="tel" inputmode="tel" required>
+      <div class="wr-error" id="tsErrorBox"></div>
+      <button class="wr-btn" id="tsSubmitBtn" type="submit">See If I Qualify →</button>
+      <p class="wr-fine">By submitting, you agree to receive text messages from The Vitality &amp; Aesthetics Institute about your request. Msg &amp; data rates may apply. Reply STOP to opt out anytime.</p>
+    </form>
+    <div class="wr-success" id="tsSuccessBox">
+      <div class="wr-check">✅</div>
+      <h3>You're in, one last step…</h3>
+      <p>Taking you to claim your spot by text — hang tight.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="wr-wrap">
+
+  <div class="wr-section">
+    <h2>Real patient. Real results.</h2>
+    <img class="wr-rounded" src="https://mdw-live-report.vercel.app/tvaai/img/tshape-ba-1.jpg" alt="T-Shape body sculpting before and after — TVAAI patient" loading="lazy">
+    <p class="wr-ba-caption">Before (left) and after (right) — T-Shape by TVAAI, actual patient.</p>
+    <img class="wr-rounded" src="https://mdw-live-report.vercel.app/tvaai/img/tshape-ba-2.jpg" alt="T-Shape stomach before and after — TVAAI patient" loading="lazy" style="margin-top:12px">
+    <p class="wr-ba-caption">Before (top) and after (bottom) — actual patient.</p>
+  </div>
+
+  <div class="wr-section">
+    <h2>Four technologies. One session.</h2>
+    <p class="wr-lead">This is why T-Shape 2 replaces invasive procedures for body contouring.</p>
+    <div class="wr-card">
+      <ul class="wr-included">
+        <li><b>Radiofrequency (RF)</b> — deep fat-cell disruption</li>
+        <li><b>Vacuum therapy</b> — lymphatic drainage</li>
+        <li><b>Infrared light</b> — skin tightening</li>
+        <li><b>Mechanical massage</b> — contouring &amp; smoothing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wr-section">
+    <h2>Popular treatment areas</h2>
+    <div class="wr-chips" style="margin-bottom:8px">
+      <span class="wr-chip">Abdomen</span>
+      <span class="wr-chip">Love handles</span>
+      <span class="wr-chip">Inner &amp; outer thighs</span>
+      <span class="wr-chip">Arms</span>
+      <span class="wr-chip">Bra area / back</span>
+      <span class="wr-chip">Post-pregnancy belly</span>
+    </div>
+    <p class="wr-lead">Loose skin after weight loss? Stubborn spots that ignore diet and exercise? That's exactly what this was built for.</p>
+  </div>
+
+  <div class="wr-section">
+    <h2>Your medical team</h2>
+    <p class="wr-lead">Every T-Shape treatment is physician-led — not a franchise chair.</p>
+    <div class="wr-card">
+      <div class="wr-provider">
+        <img src="https://assets.cdn.filesafe.space/jiR5qR3g4OrMRx6BmpF2/media/693ae41ce03e9d1a82de8ce6.webp" alt="Dr. Shirley Lima" loading="lazy">
+        <div>
+          <h3>Dr. Shirley Lima</h3>
+          <div class="wr-cred">Board-Certified Physician · Co-Founder, TVAAI</div>
+          <p>14+ years in medicine with advanced training in aesthetic procedures. Known for listening first and building treatment plans around your body — never one-size-fits-all.</p>
+        </div>
+      </div>
+    </div>
+    <div class="wr-card">
+      <div class="wr-provider">
+        <img src="https://assets.cdn.filesafe.space/jiR5qR3g4OrMRx6BmpF2/media/693ae41ced957f1eb30308e5.webp" alt="Dr. Phillip Singer" loading="lazy">
+        <div>
+          <h3>Dr. Phillip Singer, DO</h3>
+          <div class="wr-cred">Board-Certified Physician · Regenerative &amp; Aesthetic Medicine</div>
+          <p>Extensive experience in body sculpting and wellness therapies, with a personalized, data-driven approach to natural, lasting results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wr-section">
+    <h2>What patients say</h2>
+    <div class="wr-quote"><b>Comfortable from minute one</b>"Dr. Lima and the entire team made me feel comfortable from the moment I walked in."<div class="wr-who">— Houston patient</div></div>
+    <div class="wr-quote"><b>On another level</b>"The Vitality &amp; Aesthetics Institute is on another level. Clean, modern, and medical staff are incredibly knowledgeable."<div class="wr-who">— Concierge client, Houston</div></div>
+    <div class="wr-quote"><b>Like a brand new person</b>"I came in for hormone optimization and IV therapy and feel like a brand new person."<div class="wr-who">— Wellness member, Houston</div></div>
+  </div>
+
+  <div class="wr-section">
+    <h2>How it works</h2>
+    <div class="wr-step"><div class="wr-num">1</div><div><b>Check your spot</b><span>Enter your name and number — we hold your $199 intro pricing.</span></div></div>
+    <div class="wr-step"><div class="wr-num">2</div><div><b>Text with our Houston team</b><span>One quick text confirms your goals and books your visit.</span></div></div>
+    <div class="wr-step"><div class="wr-num">3</div><div><b>Get sculpted in 45 minutes</b><span>Comfortable session at our Galleria-area clinic — straight back to your day after.</span></div></div>
+  </div>
+
+  <div class="wr-cta2">
+    <a href="#tsFormCard">See If I Qualify →</a>
+  </div>
+
+  <div class="wr-section">
+    <h2>Frequently asked questions</h2>
+    <details><summary>What exactly is the $199 offer?</summary><p>A full T-Shape 2 body sculpting session — all four technologies, one treatment area, personalized assessment included — at intro pricing for new clients. Only 7 spots at this price.</p></details>
+    <details><summary>Does it hurt?</summary><p>No — most patients describe it as a warm, deep-massage feeling. It's completely non-invasive: no needles, no incisions, no anesthesia.</p></details>
+    <details><summary>Is there any downtime?</summary><p>None. The session takes about 45 minutes and you go straight back to your day.</p></details>
+    <details><summary>How many sessions will I need?</summary><p>Many patients notice a difference after their first session. Your provider will map a personalized plan at your visit — most goals are built around a short series of treatments.</p></details>
+    <details><summary>Am I a candidate?</summary><p>If you have stubborn areas that don't respond to diet and exercise, or loose skin (especially post-weight-loss or post-pregnancy), you're likely a great fit. Candidacy is confirmed by our medical team.</p></details>
+  </div>
+
+  <div class="wr-section">
+    <h2>Visit us in Houston</h2>
+    <iframe class="wr-map" src="https://www.google.com/maps?q=2603+Augusta+Dr+Suite+1450+Houston+TX+77057&output=embed" loading="lazy" title="TVAAI location map"></iframe>
+  </div>
+
+</div>
+
+<div class="wr-footer">
+  The Vitality &amp; Aesthetics Institute · 2603 Augusta Dr Suite 1450, Houston TX<br>
+  4.9★ on Google (47 reviews) · Mon–Fri 9–5 · (832) 962-4455<br>
+  Individual results may vary. Candidacy confirmed by our medical team.
+</div>
+
+</div>
+
+<style>
+#ts-atlas {
+  --cream:#FCFAF4; --cream-deep:#FDF3DC; --sand:#EADFC9; --gold:#C9A44A;
+  --gold-deep:#8A6D2A; --brown:#2A211A; --taupe:#6E6155; --green:#34C759; --green-deep:#2AA84A;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--cream); color: var(--brown); line-height: 1.5; -webkit-font-smoothing: antialiased;
+}
+#ts-atlas * { margin:0; padding:0; box-sizing:border-box; }
+#ts-atlas img { max-width:100%; height:auto; display:block; }
+#ts-atlas h1, #ts-atlas h2, #ts-atlas h3 { font-weight:800; }
+#ts-atlas .wr-banner { background:var(--brown); color:var(--cream-deep); text-align:center; font-size:14px; font-weight:600; padding:10px 16px; }
+#ts-atlas .wr-stickybar { position:fixed; top:0; left:0; right:0; background:rgba(252,250,244,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--sand); display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 16px; z-index:9999; transform:translateY(-110%); transition:transform .25s ease; }
+#ts-atlas .wr-stickybar.wr-show { transform:translateY(0); }
+#ts-atlas .wr-sticky-price { font-weight:800; font-size:15px; }
+#ts-atlas .wr-sticky-price span { color:var(--gold-deep); }
+#ts-atlas .wr-stickybar a { background:var(--green); color:#fff; text-decoration:none; font-weight:700; font-size:14px; border-radius:10px; padding:10px 16px; white-space:nowrap; }
+#ts-atlas .wr-wrap { max-width:560px; margin:0 auto; padding:0 20px; }
+#ts-atlas .wr-herobg { background:linear-gradient(180deg, rgba(252,250,244,.94) 0%, rgba(252,250,244,.90) 45%, rgba(252,250,244,.96) 82%, var(--cream) 100%), url('https://atlas-landing-eight.vercel.app/hero-bg.jpg') center 30%/cover no-repeat; padding-bottom:18px; }
+#ts-atlas .wr-hero { text-align:center; padding:34px 0 8px; }
+#ts-atlas .wr-eyebrow { display:inline-block; background:var(--cream-deep); border:1px solid var(--sand); color:var(--gold-deep); font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; padding:6px 14px; margin-bottom:18px; }
+#ts-atlas h1 { font-size:31px; line-height:1.15; letter-spacing:-.01em; margin-bottom:12px; }
+#ts-atlas .wr-gold { color:var(--gold-deep); }
+#ts-atlas .wr-sub { color:var(--taupe); font-size:17px; max-width:470px; margin:0 auto 10px; }
+#ts-atlas .wr-stars { color:var(--gold); font-size:15px; letter-spacing:2px; }
+#ts-atlas .wr-trust { font-size:13.5px; color:var(--taupe); margin:10px 0 22px; }
+#ts-atlas .wr-trust b { color:var(--brown); }
+#ts-atlas .wr-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0 0 24px; }
+#ts-atlas .wr-chip { background:#fff; border:1px solid var(--sand); border-radius:999px; font-size:12.5px; font-weight:600; padding:7px 13px; }
+#ts-atlas .wr-chip b { color:var(--gold-deep); }
+#ts-atlas .wr-card { background:#fff; border:1px solid var(--sand); border-radius:18px; box-shadow:0 8px 30px rgba(42,33,26,.07); padding:26px 22px; margin-bottom:14px; }
+#ts-atlas .wr-card h2 { font-size:19px; text-align:center; margin-bottom:4px; }
+#ts-atlas .wr-hint { text-align:center; color:var(--taupe); font-size:14px; margin-bottom:18px; }
+#ts-atlas label { display:block; font-size:13px; font-weight:600; margin:14px 0 6px; }
+#ts-atlas input[type=text], #ts-atlas input[type=tel] { width:100%; font-size:17px; padding:14px 16px; border:1.5px solid var(--sand); border-radius:12px; background:var(--cream); color:var(--brown); outline:none; transition:border-color .15s; }
+#ts-atlas input:focus { border-color:var(--gold); background:#fff; }
+#ts-atlas .wr-btn { width:100%; margin-top:20px; background:var(--green); color:#fff; font-size:18px; font-weight:700; border:none; border-radius:14px; padding:17px; cursor:pointer; box-shadow:0 6px 18px rgba(52,199,89,.35); }
+#ts-atlas .wr-btn:hover { background:var(--green-deep); }
+#ts-atlas .wr-btn:disabled { opacity:.6; cursor:wait; }
+#ts-atlas .wr-fine { font-size:11.5px; color:var(--taupe); text-align:center; margin-top:12px; line-height:1.45; }
+#ts-atlas .wr-error { display:none; background:#fdf0ef; border:1px solid #f0c4c0; color:#b3402f; font-size:14px; border-radius:10px; padding:10px 14px; margin-top:14px; text-align:center; }
+#ts-atlas .wr-success { display:none; text-align:center; padding:18px 6px; }
+#ts-atlas .wr-check { font-size:44px; }
+#ts-atlas .wr-success h3 { font-size:20px; margin:10px 0 6px; }
+#ts-atlas .wr-success p { color:var(--taupe); font-size:15px; }
+#ts-atlas .wr-section { padding:26px 0 6px; }
+#ts-atlas .wr-section > h2 { font-size:22px; text-align:center; margin-bottom:6px; }
+#ts-atlas .wr-lead { text-align:center; color:var(--taupe); font-size:15px; margin-bottom:18px; }
+#ts-atlas .wr-ba-caption { text-align:center; color:var(--taupe); font-size:13px; margin-top:8px; }
+#ts-atlas .wr-rounded { border-radius:16px; border:1px solid var(--sand); }
+#ts-atlas .wr-included { list-style:none; }
+#ts-atlas .wr-included li { padding:9px 0 9px 30px; position:relative; font-size:15.5px; border-bottom:1px solid var(--cream-deep); }
+#ts-atlas .wr-included li:last-child { border-bottom:none; }
+#ts-atlas .wr-included li::before { content:"✓"; position:absolute; left:4px; color:var(--gold-deep); font-weight:700; }
+#ts-atlas .wr-included li b { color:var(--gold-deep); }
+#ts-atlas .wr-provider { display:flex; gap:16px; align-items:flex-start; }
+#ts-atlas .wr-provider img { width:92px; height:92px; object-fit:cover; border-radius:14px; border:1px solid var(--sand); flex-shrink:0; }
+#ts-atlas .wr-provider h3 { font-size:17px; margin-bottom:2px; }
+#ts-atlas .wr-cred { color:var(--gold-deep); font-size:12.5px; font-weight:700; margin-bottom:6px; }
+#ts-atlas .wr-provider p { font-size:14px; color:var(--taupe); }
+#ts-atlas .wr-step { display:flex; gap:14px; align-items:flex-start; margin-bottom:16px; }
+#ts-atlas .wr-num { flex:0 0 32px; height:32px; background:var(--cream-deep); border:1px solid var(--sand); color:var(--gold-deep); font-weight:700; border-radius:999px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+#ts-atlas .wr-step b { display:block; font-size:15.5px; }
+#ts-atlas .wr-step span { color:var(--taupe); font-size:14.5px; }
+#ts-atlas .wr-quote { background:#fff; border:1px solid var(--sand); border-radius:14px; padding:18px; margin-bottom:12px; font-size:15px; }
+#ts-atlas .wr-quote b { display:block; font-size:14px; color:var(--gold-deep); margin-bottom:6px; }
+#ts-atlas .wr-who { color:var(--taupe); font-size:13px; margin-top:8px; }
+#ts-atlas details { background:#fff; border:1px solid var(--sand); border-radius:12px; margin-bottom:10px; padding:0 16px; }
+#ts-atlas details summary { cursor:pointer; font-weight:600; font-size:15px; padding:14px 0; list-style:none; position:relative; }
+#ts-atlas details summary::after { content:"+"; position:absolute; right:2px; color:var(--gold-deep); font-weight:700; }
+#ts-atlas details[open] summary::after { content:"–"; }
+#ts-atlas details p { padding:0 0 14px; font-size:14.5px; color:var(--taupe); }
+#ts-atlas .wr-cta2 { text-align:center; padding:12px 0 26px; }
+#ts-atlas .wr-cta2 a { display:inline-block; background:var(--green); color:#fff; text-decoration:none; font-weight:700; font-size:17px; border-radius:14px; padding:16px 34px; box-shadow:0 6px 18px rgba(52,199,89,.35); }
+#ts-atlas .wr-map { border:0; width:100%; height:220px; border-radius:16px; }
+#ts-atlas .wr-footer { text-align:center; color:var(--taupe); font-size:12.5px; padding:24px 20px 40px; border-top:1px solid var(--sand); margin-top:24px; line-height:1.7; }
+@media (min-width:600px) { #ts-atlas h1 { font-size:38px; } }
+</style>
+
+<script>
+(function () {
+  var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/jiR5qR3g4OrMRx6BmpF2/webhook-trigger/iWzY2syI834lAz0R76B0';
+  var NEXT_URL = 'https://tvaa.doctorleadflow.com/claim-t-shape'; // ← CHANGE if your claim page path differs
+
+  var bar = document.getElementById('tsStickybar');
+  var hero = document.getElementById('tsFormCard');
+  window.addEventListener('scroll', function () {
+    bar.classList.toggle('wr-show', hero.getBoundingClientRect().bottom < 0);
+  }, { passive: true });
+
+  var form = document.getElementById('tsQualifyForm');
+  var btn = document.getElementById('tsSubmitBtn');
+  var errorBox = document.getElementById('tsErrorBox');
+  function showError(msg) { errorBox.textContent = msg; errorBox.style.display = 'block'; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+    var firstName = document.getElementById('tsFirstName').value.trim();
+    var phone = document.getElementById('tsPhone').value.trim();
+    var digits = phone.replace(/\D/g, '');
+    if (firstName.length < 2) return showError('Please enter your first name.');
+    if (digits.length !== 10 && !(digits.length === 11 && digits.charAt(0) === '1')) {
+      return showError('Please enter a valid US mobile number.');
+    }
+    btn.disabled = true;
+    btn.textContent = 'Checking…';
+    var normalized = digits.length === 11 ? '+' + digits : '+1' + digits;
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name: firstName,
+        phone: normalized,
+        source: 'tshape-landing-page',
+        tag: 'tshape-qualify',
+        offer: 'tshape-199'
+      })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Something went wrong. Please try again.');
+        form.style.display = 'none';
+        document.getElementById('tsSuccessBox').style.display = 'block';
+        if (window.fbq) fbq('trackCustom', 'QualifyFormSubmit', {offer: 't-shape'});
+        setTimeout(function () { window.location.href = NEXT_URL; }, 1400);
+      })
+      .catch(function (err) {
+        showError(err.message);
+        btn.disabled = false;
+        btn.textContent = 'See If I Qualify →';
+      });
+  });
+})();
+</script>
+</div>
