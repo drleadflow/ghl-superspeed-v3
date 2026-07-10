@@ -1,0 +1,264 @@
+<!-- ══════════════════════════════════════════════════════════════════
+     PRESTIGE — SUMMER GLOW PROTOCOL LANDING PAGE
+     Paste into ONE GHL custom-code element (full-width section, no padding).
+     Suggested path: /summerglow
+     Form posts LIVE to the Prestige inbound webhook → contact + `summerglow-qualify`.
+
+     FILL BEFORE LAUNCH (search for TODO):
+       1. NEXT_URL          — claim/thank-you page (empty = stays on success message)
+       2. Andrea headshot   — TODO-HEADSHOT
+       3. Clinic/brand hero — TODO-HERO (optional; page works without)
+       4. Google rating     — TODO-RATING (do NOT invent; remove block if unknown)
+       5. Address + phone   — TODO-ADDRESS / TODO-PHONE
+     Compliance: no drug names anywhere · "results may vary" in footer ·
+     no static before/after images (video-format only per Meta policy).
+     ══════════════════════════════════════════════════════════════════ -->
+<div id="sg-atlas">
+
+<div class="sg-stickybar" id="sgStickybar">
+  <div class="sg-sticky-price">Summer Glow Protocol · <span>Free Consultation</span></div>
+  <a href="#sgFormCard">See If I Qualify</a>
+</div>
+
+<div class="sg-banner">☀️ Now enrolling for summer — limited protocol spots · Franklin, TN</div>
+
+<div class="sg-wrap">
+
+  <div class="sg-hero">
+    <div class="sg-eyebrow">Summer Glow Protocol · Franklin, TN</div>
+    <h1>Feel Genuinely Confident This Summer — <span class="sg-accent">Not Just "Good Enough."</span></h1>
+    <p class="sg-sub">An 8-week personalized skin + wellness program from <b>Andrea Pryor, WHNP-BC</b> — medical-grade skin treatments and a customized wellness plan, built around <i>your</i> starting point. Not a menu. Not cookie-cutter.</p>
+    <div class="sg-chips">
+      <span class="sg-chip"><b>WHNP-BC</b> Women's Health NP</span>
+      <span class="sg-chip"><b>23</b> years clinical experience</span>
+      <span class="sg-chip"><b>8</b> weeks, one plan</span>
+    </div>
+  </div>
+
+  <div class="sg-card" id="sgFormCard">
+    <h2>See If You Qualify</h2>
+    <p class="sg-hint">Takes 20 seconds. We'll text you to set up your free consultation with Andrea.</p>
+    <form id="sgQualifyForm" novalidate>
+      <label for="sgFirstName">First name</label>
+      <input type="text" id="sgFirstName" placeholder="Your first name" autocomplete="given-name" required>
+      <label for="sgPhone">Mobile number</label>
+      <input type="tel" id="sgPhone" placeholder="(615) 555-0123" autocomplete="tel" inputmode="tel" required>
+      <div class="sg-error" id="sgErrorBox"></div>
+      <button class="sg-btn" id="sgSubmitBtn" type="submit">See If I Qualify →</button>
+      <p class="sg-fine">By submitting, you agree to receive text messages from A Prestige Aesthetics &amp; Wellness about your request. Msg &amp; data rates may apply. Reply STOP to opt out anytime.</p>
+    </form>
+    <div class="sg-success" id="sgSuccessBox">
+      <div class="sg-check">✅</div>
+      <h3>You're in!</h3>
+      <p>Keep an eye on your texts — Andrea's team will reach out shortly to set up your free consultation.</p>
+    </div>
+  </div>
+
+  <div class="sg-section">
+    <h2>The problem isn't willpower. It's the plan.</h2>
+    <p class="sg-lead">Most women "prep for summer" with one thing at a time — a diet, a facial, a new routine. The Summer Glow Protocol addresses your skin, your body composition, and your overall wellness <b>at the same time</b> — because addressing just one piece rarely gives you the full outcome.</p>
+    <div class="sg-card">
+      <ul class="sg-included">
+        <li><b>Medical-grade skin treatments</b> — selected for your skin's texture, tone, hydration, and laxity. Clinical level, not day-spa facials.</li>
+        <li><b>Customized wellness plan</b> — built from your health history and goals, supporting the results from the inside.</li>
+        <li><b>The whole-picture lens</b> — hormonal and metabolic shifts show up in your skin and body. Andrea's women's-health background means both get looked at.</li>
+        <li><b>Personalized from day one</b> — everything starts from your specific starting point. If a treatment isn't right for you, it's not in your plan.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sg-section">
+    <h2>Why skin-first works</h2>
+    <div class="sg-quote">"The women who feel the most confident don't just have a great body or great style. They have great skin — and most of them work on it intentionally. Skin is an organ. It responds to treatment."<div class="sg-who">— Andrea Pryor, WHNP-BC</div></div>
+    <p class="sg-lead">Summer heat, sun exposure, and dehydration all work against your skin. Without a proactive protocol, most women start the season behind before it even begins.</p>
+  </div>
+
+  <div class="sg-section">
+    <h2>Your provider</h2>
+    <p class="sg-lead">Most aesthetic clinics treat your skin. Andrea treats <i>you</i>.</p>
+    <div class="sg-card">
+      <div class="sg-provider">
+        <!-- TODO-HEADSHOT: replace src with Andrea's photo URL -->
+        <img src="https://via.placeholder.com/184x184.png?text=Andrea" alt="Andrea Pryor, WHNP-BC" loading="lazy">
+        <div>
+          <h3>Andrea Pryor, WHNP-BC</h3>
+          <div class="sg-cred">Board-Certified Women's Health Nurse Practitioner · 23 Years Clinical Experience · Mom of 5</div>
+          <p>Andrea's background is understanding the whole picture — hormone health, metabolic function, and how both show up in your skin and body. Her promise: no upselling, no cookie-cutter menus. "If I don't think it's the right fit for you at your consultation, I'll tell you that and point you in the right direction. That's how I work."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODO-RATING: if Prestige has a strong Google rating, add it here.
+       Do NOT publish an invented number. Delete this comment either way. -->
+
+  <div class="sg-section">
+    <h2>How it works</h2>
+    <div class="sg-step"><div class="sg-num">1</div><div><b>Check your spot</b><span>Enter your name and number — takes 20 seconds.</span></div></div>
+    <div class="sg-step"><div class="sg-num">2</div><div><b>Free consultation with Andrea</b><span>She assesses your skin and the whole picture, then maps your personalized 8-week plan. No pressure, no upsell.</span></div></div>
+    <div class="sg-step"><div class="sg-num">3</div><div><b>Your 8-week Summer Glow Protocol</b><span>Medical-grade skin treatments + your customized wellness plan, working together.</span></div></div>
+  </div>
+
+  <div class="sg-honest">
+    <p>"I'm not going to promise you a miracle. But I've watched a lot of women go from dreading summer to genuinely looking forward to it. And that transformation is very real."</p>
+    <div class="sg-who">— Andrea</div>
+  </div>
+
+  <div class="sg-cta2">
+    <a href="#sgFormCard">See If I Qualify →</a>
+  </div>
+
+  <div class="sg-section">
+    <h2>Frequently asked questions</h2>
+    <details><summary>What exactly is the Summer Glow Protocol?</summary><p>A personalized 8-week program combining a series of medical-grade skin treatments (chosen for your skin's specific needs — texture, tone, hydration, overall glow) with a customized wellness plan built from your health history and goals. Everything is selected at your consultation — nothing is one-size-fits-all.</p></details>
+    <details><summary>Is this just fancy facials?</summary><p>No. The skin treatments are clinical-grade — they work at a level over-the-counter products and day-spa facials can't reach. Combined with internal wellness support, results compound in ways surface-only approaches don't.</p></details>
+    <details><summary>Who is a good candidate?</summary><p>Women who've noticed changes in their skin or body — especially through their 40s and 50s — and want a structured, medical plan instead of guesswork. Candidacy is confirmed at your consultation; if Andrea doesn't think it's the right fit, she'll tell you and point you in the right direction.</p></details>
+    <details><summary>How fast will I see results?</summary><p>The protocol runs 8 weeks, and many patients report visible changes within it. Every plan and every timeline is personal — individual results vary, and Andrea will set honest expectations for yours at the consultation.</p></details>
+    <details><summary>What does it cost?</summary><p>The consultation is free, and your plan is personalized — so the investment depends on what your plan actually includes. Andrea builds what makes sense for you, nothing more. You'll know exactly what's involved before committing to anything.</p></details>
+    <details><summary>Do I have to be in Franklin?</summary><p>The clinic serves Franklin, Brentwood, Cool Springs, and the greater Nashville area. Treatments are in-person at A Prestige Aesthetics &amp; Wellness in Franklin, TN.</p></details>
+  </div>
+
+  <div class="sg-section">
+    <h2>Visit us in Franklin</h2>
+    <!-- TODO-ADDRESS: replace the map query with the exact street address -->
+    <iframe class="sg-map" src="https://www.google.com/maps?q=A+Prestige+Aesthetics+and+Wellness+Franklin+TN&output=embed" loading="lazy" title="A Prestige Aesthetics & Wellness location map"></iframe>
+  </div>
+
+</div>
+
+<div class="sg-footer">
+  A Prestige Aesthetics &amp; Wellness · Franklin, TN <!-- TODO-ADDRESS full street address · TODO-PHONE --><br>
+  Individual results may vary. The Summer Glow Protocol is personalized per patient; candidacy and treatment selection are determined by your provider at consultation.
+</div>
+
+</div>
+
+<style>
+#sg-atlas {
+  --cream:#FDFBF6; --cream-deep:#FBEFDF; --sand:#EFDFC8; --glow:#D98E4A;
+  --glow-deep:#A45A24; --ink:#2B2118; --taupe:#6E6155; --green:#34C759; --green-deep:#2AA84A;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--cream); color: var(--ink); line-height: 1.5; -webkit-font-smoothing: antialiased;
+}
+#sg-atlas * { margin:0; padding:0; box-sizing:border-box; }
+#sg-atlas img { max-width:100%; height:auto; display:block; }
+#sg-atlas h1, #sg-atlas h2, #sg-atlas h3 { font-weight:800; }
+#sg-atlas .sg-banner { background:var(--ink); color:var(--cream-deep); text-align:center; font-size:14px; font-weight:600; padding:10px 16px; }
+#sg-atlas .sg-stickybar { position:fixed; top:0; left:0; right:0; background:rgba(253,251,246,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--sand); display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 16px; z-index:9999; transform:translateY(-110%); transition:transform .25s ease; }
+#sg-atlas .sg-stickybar.sg-show { transform:translateY(0); }
+#sg-atlas .sg-sticky-price { font-weight:800; font-size:15px; }
+#sg-atlas .sg-sticky-price span { color:var(--glow-deep); }
+#sg-atlas .sg-stickybar a { background:var(--green); color:#fff; text-decoration:none; font-weight:700; font-size:14px; border-radius:10px; padding:10px 16px; white-space:nowrap; }
+#sg-atlas .sg-wrap { max-width:560px; margin:0 auto; padding:0 20px; }
+#sg-atlas .sg-hero { text-align:center; padding:36px 0 8px; }
+#sg-atlas .sg-eyebrow { display:inline-block; background:var(--cream-deep); border:1px solid var(--sand); color:var(--glow-deep); font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; padding:6px 14px; margin-bottom:18px; }
+#sg-atlas h1 { font-size:31px; line-height:1.15; letter-spacing:-.01em; margin-bottom:12px; }
+#sg-atlas .sg-accent { color:var(--glow-deep); }
+#sg-atlas .sg-sub { color:var(--taupe); font-size:17px; max-width:480px; margin:0 auto 16px; }
+#sg-atlas .sg-chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0 0 24px; }
+#sg-atlas .sg-chip { background:#fff; border:1px solid var(--sand); border-radius:999px; font-size:12.5px; font-weight:600; padding:7px 13px; }
+#sg-atlas .sg-chip b { color:var(--glow-deep); }
+#sg-atlas .sg-card { background:#fff; border:1px solid var(--sand); border-radius:18px; box-shadow:0 8px 30px rgba(43,33,24,.07); padding:26px 22px; margin-bottom:14px; }
+#sg-atlas .sg-card h2 { font-size:19px; text-align:center; margin-bottom:4px; }
+#sg-atlas .sg-hint { text-align:center; color:var(--taupe); font-size:14px; margin-bottom:18px; }
+#sg-atlas label { display:block; font-size:13px; font-weight:600; margin:14px 0 6px; }
+#sg-atlas input[type=text], #sg-atlas input[type=tel] { width:100%; font-size:17px; padding:14px 16px; border:1.5px solid var(--sand); border-radius:12px; background:var(--cream); color:var(--ink); outline:none; transition:border-color .15s; }
+#sg-atlas input:focus { border-color:var(--glow); background:#fff; }
+#sg-atlas .sg-btn { width:100%; margin-top:20px; background:var(--green); color:#fff; font-size:18px; font-weight:700; border:none; border-radius:14px; padding:17px; cursor:pointer; box-shadow:0 6px 18px rgba(52,199,89,.35); }
+#sg-atlas .sg-btn:hover { background:var(--green-deep); }
+#sg-atlas .sg-btn:disabled { opacity:.6; cursor:wait; }
+#sg-atlas .sg-fine { font-size:11.5px; color:var(--taupe); text-align:center; margin-top:12px; line-height:1.45; }
+#sg-atlas .sg-error { display:none; background:#fdf0ef; border:1px solid #f0c4c0; color:#b3402f; font-size:14px; border-radius:10px; padding:10px 14px; margin-top:14px; text-align:center; }
+#sg-atlas .sg-success { display:none; text-align:center; padding:18px 6px; }
+#sg-atlas .sg-check { font-size:44px; }
+#sg-atlas .sg-success h3 { font-size:20px; margin:10px 0 6px; }
+#sg-atlas .sg-success p { color:var(--taupe); font-size:15px; }
+#sg-atlas .sg-section { padding:26px 0 6px; }
+#sg-atlas .sg-section > h2 { font-size:22px; text-align:center; margin-bottom:6px; }
+#sg-atlas .sg-lead { text-align:center; color:var(--taupe); font-size:15px; margin-bottom:18px; }
+#sg-atlas .sg-lead b, #sg-atlas .sg-lead i { color:var(--ink); }
+#sg-atlas .sg-included { list-style:none; }
+#sg-atlas .sg-included li { padding:9px 0 9px 30px; position:relative; font-size:15px; border-bottom:1px solid var(--cream-deep); }
+#sg-atlas .sg-included li:last-child { border-bottom:none; }
+#sg-atlas .sg-included li::before { content:"☀"; position:absolute; left:2px; color:var(--glow); font-weight:700; }
+#sg-atlas .sg-included li b { color:var(--glow-deep); }
+#sg-atlas .sg-quote { background:#fff; border:1px solid var(--sand); border-left:4px solid var(--glow); border-radius:14px; padding:18px; margin-bottom:14px; font-size:15.5px; font-style:italic; }
+#sg-atlas .sg-who { color:var(--taupe); font-size:13px; margin-top:8px; font-style:normal; }
+#sg-atlas .sg-provider { display:flex; gap:16px; align-items:flex-start; }
+#sg-atlas .sg-provider img { width:92px; height:92px; object-fit:cover; border-radius:14px; border:1px solid var(--sand); flex-shrink:0; }
+#sg-atlas .sg-provider h3 { font-size:17px; margin-bottom:2px; }
+#sg-atlas .sg-cred { color:var(--glow-deep); font-size:12.5px; font-weight:700; margin-bottom:6px; }
+#sg-atlas .sg-provider p { font-size:14px; color:var(--taupe); }
+#sg-atlas .sg-step { display:flex; gap:14px; align-items:flex-start; margin-bottom:16px; }
+#sg-atlas .sg-num { flex:0 0 32px; height:32px; background:var(--cream-deep); border:1px solid var(--sand); color:var(--glow-deep); font-weight:700; border-radius:999px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+#sg-atlas .sg-step b { display:block; font-size:15.5px; }
+#sg-atlas .sg-step span { color:var(--taupe); font-size:14.5px; }
+#sg-atlas .sg-honest { background:var(--cream-deep); border:1px solid var(--sand); border-radius:16px; padding:20px 22px; margin:26px 0 6px; text-align:center; font-size:16px; font-style:italic; }
+#sg-atlas details { background:#fff; border:1px solid var(--sand); border-radius:12px; margin-bottom:10px; padding:0 16px; }
+#sg-atlas details summary { cursor:pointer; font-weight:600; font-size:15px; padding:14px 0; list-style:none; position:relative; }
+#sg-atlas details summary::after { content:"+"; position:absolute; right:2px; color:var(--glow-deep); font-weight:700; }
+#sg-atlas details[open] summary::after { content:"–"; }
+#sg-atlas details p { padding:0 0 14px; font-size:14.5px; color:var(--taupe); }
+#sg-atlas .sg-cta2 { text-align:center; padding:12px 0 26px; }
+#sg-atlas .sg-cta2 a { display:inline-block; background:var(--green); color:#fff; text-decoration:none; font-weight:700; font-size:17px; border-radius:14px; padding:16px 34px; box-shadow:0 6px 18px rgba(52,199,89,.35); }
+#sg-atlas .sg-map { border:0; width:100%; height:220px; border-radius:16px; }
+#sg-atlas .sg-footer { text-align:center; color:var(--taupe); font-size:12.5px; padding:24px 20px 40px; border-top:1px solid var(--sand); margin-top:24px; line-height:1.7; }
+@media (min-width:600px) { #sg-atlas h1 { font-size:38px; } }
+</style>
+
+<script>
+(function () {
+  var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/9uog1fOUDtxkSr4ZPx1i/webhook-trigger/Cu7cbRdIhnTsZoHRK8mi';
+  var NEXT_URL = ''; // TODO: claim/thank-you page URL. Empty = stay on the success message.
+
+  var bar = document.getElementById('sgStickybar');
+  var hero = document.getElementById('sgFormCard');
+  window.addEventListener('scroll', function () {
+    bar.classList.toggle('sg-show', hero.getBoundingClientRect().bottom < 0);
+  }, { passive: true });
+
+  var form = document.getElementById('sgQualifyForm');
+  var btn = document.getElementById('sgSubmitBtn');
+  var errorBox = document.getElementById('sgErrorBox');
+  function showError(msg) { errorBox.textContent = msg; errorBox.style.display = 'block'; }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+    var firstName = document.getElementById('sgFirstName').value.trim();
+    var phone = document.getElementById('sgPhone').value.trim();
+    var digits = phone.replace(/\D/g, '');
+    if (firstName.length < 2) return showError('Please enter your first name.');
+    if (digits.length !== 10 && !(digits.length === 11 && digits.charAt(0) === '1')) {
+      return showError('Please enter a valid US mobile number.');
+    }
+    btn.disabled = true;
+    btn.textContent = 'Checking…';
+    var normalized = digits.length === 11 ? '+' + digits : '+1' + digits;
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name: firstName,
+        phone: normalized,
+        source: 'summerglow-landing-page',
+        tag: 'summerglow-qualify',
+        offer: 'summer-glow-protocol'
+      })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Something went wrong. Please try again.');
+        form.style.display = 'none';
+        document.getElementById('sgSuccessBox').style.display = 'block';
+        if (window.fbq) fbq('trackCustom', 'QualifyFormSubmit', {offer: 'summer-glow-protocol'});
+        if (NEXT_URL) setTimeout(function () { window.location.href = NEXT_URL; }, 1400);
+      })
+      .catch(function (err) {
+        showError(err.message);
+        btn.disabled = false;
+        btn.textContent = 'See If I Qualify →';
+      });
+  });
+})();
+</script>
+</div>
