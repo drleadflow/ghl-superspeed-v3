@@ -78,8 +78,7 @@
     <p class="sg-lead">Most aesthetic clinics treat your skin. Andrea treats <i>you</i>.</p>
     <div class="sg-card">
       <div class="sg-provider">
-        <!-- TODO-HEADSHOT: replace src with Andrea's photo URL -->
-        <img src="https://via.placeholder.com/184x184.png?text=Andrea" alt="Andrea Pryor, WHNP-BC" loading="lazy">
+        <img src="https://aprestigeaesthetics.com/wp-content/uploads/2025/03/67887ddd81acba01a2d9a2a5_APrestige8JPG.webp" alt="Andrea Pryor, WHNP-BC" loading="lazy">
         <div>
           <h3>Andrea Pryor, WHNP-BC</h3>
           <div class="sg-cred">Board-Certified Women's Health Nurse Practitioner · 23 Years Clinical Experience · Mom of 5</div>
@@ -89,8 +88,11 @@
     </div>
   </div>
 
-  <!-- TODO-RATING: if Prestige has a strong Google rating, add it here.
-       Do NOT publish an invented number. Delete this comment either way. -->
+  <div class="sg-section">
+    <h2>From our Google reviews</h2>
+    <div class="sg-quote">"Great customer service starting with the front desk… Andrea has the most gentle techniques with injectables."<div class="sg-who">— Verified Google review</div></div>
+    <!-- TODO-RATING: add "X.X★ on Google · N reviews" to the footer once confirmed — do NOT invent the number -->
+  </div>
 
   <div class="sg-section">
     <h2>How it works</h2>
@@ -120,14 +122,13 @@
 
   <div class="sg-section">
     <h2>Visit us in Franklin</h2>
-    <!-- TODO-ADDRESS: replace the map query with the exact street address -->
-    <iframe class="sg-map" src="https://www.google.com/maps?q=A+Prestige+Aesthetics+and+Wellness+Franklin+TN&output=embed" loading="lazy" title="A Prestige Aesthetics & Wellness location map"></iframe>
+    <iframe class="sg-map" src="https://www.google.com/maps?q=504+Autumn+Springs+Ct+%2319+Franklin+TN+37067&output=embed" loading="lazy" title="A Prestige Aesthetics & Wellness location map"></iframe>
   </div>
 
 </div>
 
 <div class="sg-footer">
-  A Prestige Aesthetics &amp; Wellness · Franklin, TN <!-- TODO-ADDRESS full street address · TODO-PHONE --><br>
+  A Prestige Aesthetics &amp; Wellness · 504 Autumn Springs Ct #19, Franklin, TN 37067 · (615) 996-2140<br>
   Individual results may vary. The Summer Glow Protocol is personalized per patient; candidacy and treatment selection are determined by your provider at consultation.
 </div>
 
@@ -209,7 +210,7 @@
 <script>
 (function () {
   var WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/9uog1fOUDtxkSr4ZPx1i/webhook-trigger/Cu7cbRdIhnTsZoHRK8mi';
-  var NEXT_URL = ''; // TODO: claim/thank-you page URL. Empty = stay on the success message.
+  var NEXT_URL = '/summerglow-claim'; // the Summer Glow claim page (same funnel domain)
 
   var bar = document.getElementById('sgStickybar');
   var hero = document.getElementById('sgFormCard');
