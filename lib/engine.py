@@ -346,7 +346,7 @@ def dm_email(text: str) -> str:
         the bullets away from their lead-in (e.g., a bold header).
       - The LAST line in a list run keeps the standard margin so the next
         section gets the one-enter gap.
-      - Blank source line → ``EMAIL_BLANK_P`` separator (legacy support).
+      - Blank source line → skipped (stripped; consecutive blank lines produce no output).
       - Bare ``[Label]`` line → anchor wrapped to ``{{custom_values.booking_link}}``.
       - Inline ``[text](url)``, ``**bold**``, ``*italic*`` honored.
     """
@@ -361,7 +361,6 @@ def dm_email(text: str) -> str:
     for i, raw in enumerate(raw_lines):
         stripped = raw.strip()
         if not stripped:
-            parts.append(EMAIL_BLANK_P)
             continue
         # Tight if THIS line is a list item AND it's not the last item in
         # the current list run (last item keeps margin so next section
