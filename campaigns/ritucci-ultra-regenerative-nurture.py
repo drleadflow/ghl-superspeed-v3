@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ritucci Regenerative Medicine — Ultra Regenerative Package nurture sequence.
+Ritucci Regenerative Medicine  -  Ultra Regenerative Package nurture sequence.
 
 Generated: 2026-05-06 (populated by /build-sequence)
 Source offer:  offers/ritucci-ultra-regenerative.md
@@ -15,7 +15,7 @@ Has Deadline = No → 27 automated touchpoints (Day 5 deadline email dropped).
 Compliance constraints baked into every piece of copy:
   - No "cures / heals / regrows / reverses / fixes" claims
   - No published pricing in any prospect-facing copy
-  - $100 no-show fee is INTERNAL POLICY — NEVER surfaced
+  - $100 no-show fee is INTERNAL POLICY  -  NEVER surfaced
   - No before/after photos (images_available=false), no doctor video (still to be filmed)
   - Real testimonials only; composite/example patients are unnamed
   - Candidacy-gated language ("if you're a candidate", "depending on evaluation")
@@ -24,11 +24,11 @@ Compliance constraints baked into every piece of copy:
 Token rules:
   - {{custom_values.booking_link}} and {{custom_values.text_message_name}} stay as runtime tokens
   - Tag namespace: ritucci-ultra-regenerative-* (NEVER bare lead/replied/booked)
-  - Free Consult offer uses ritucci-free-consult-* — must not collide
+  - Free Consult offer uses ritucci-free-consult-*  -  must not collide
 
 Pre-deploy human action (see QA report Section C):
   1. Set GHL custom value `text_message_name` for location gasmmKGJL9bP7ruM49bh
-     (Ultra uses a bot persona — NOT "Steven Ritucci Jr.")
+     (Ultra uses a bot persona  -  NOT "Steven Ritucci Jr.")
   2. Set GHL custom value `booking_link` for the Ultra-package calendar URL
   3. Replace TODO_FB_PAGE_ID below with the real Facebook page ID
      (GET /integrations/facebook/{loc}/trigger/pages once connected)
@@ -59,7 +59,7 @@ OFFER_KEYWORD = "MOVE"
 
 NOTION_PAGE_ID = "355728795ff081139b6ce2479ac60b1d"
 
-# Tag namespace — every tag prefixed with the offer slug
+# Tag namespace  -  every tag prefixed with the offer slug
 TAG_LEAD             = "ritucci-ultra-regenerative-lead"
 TAG_KEYWORD_TRIGGER  = "ritucci-ultra-regenerative-keyword-trigger"
 TAG_RETURNING_LEAD   = "ritucci-ultra-regenerative-returning-lead"
@@ -69,10 +69,10 @@ TAG_REPLIED          = "ritucci-ultra-regenerative-replied"
 
 # ── Touchpoint copy ───────────────────────────────────────────────────────────
 
-# D0 T+1 — Qualifier SMS (text-only, no MMS — images_available=false)
+# D0 T+1  -  Qualifier SMS (text-only, no MMS  -  images_available=false)
 SMS_D0_T1 = (
     "Hey {{contact.first_name}}, this is {{custom_values.text_message_name}} from "
-    "Ritucci Regenerative Medicine. Got your request — quick question so I can "
+    "Ritucci Regenerative Medicine. Got your request  -  quick question so I can "
     "send the right info: reply 'surgery' if you've been told surgery may be "
     "your next step, or 'pain' if you're managing chronic flare-ups and want "
     "to avoid getting there. Reply STOP to opt out."
@@ -83,19 +83,19 @@ E1_SUBJECT = "is non-surgical regeneration actually an option for your joint?"
 E1_PREVIEW = "Quick rundown of the protocol + one segmenting question before I send anything else"
 E1_BODY = """Hey {{contact.first_name}},
 
-{{custom_values.text_message_name}} here from Ritucci Regenerative Medicine in Norwood. You reached out about non-surgical options for chronic joint pain — thanks for raising your hand.
+{{custom_values.text_message_name}} here from Ritucci Regenerative Medicine in Norwood. You reached out about non-surgical options for chronic joint pain  -  thanks for raising your hand.
 
 Before I send you anything else, here's the quick version of what we do, in three lines:
 
-- An 8–12 week customized protocol — not a single PRP injection like most clinics offer
+- An 8 - 12 week customized protocol  -  not a single PRP injection like most clinics offer
 - Layered therapies (PRP, A2M, bone marrow concentrate, focused shockwave) chosen per joint
-- Every procedure ultrasound-guided by Dr. Ritucci — a double-board-certified physician
+- Every procedure ultrasound-guided by Dr. Ritucci  -  a double-board-certified physician
 
 One question before I send the next email so I send the right thing:
 
 **Have you been told surgery is the next step, or are you trying to get ahead of it before it gets there?**
 
-If you'd rather just see what's open, here's Dr. Ritucci's 15-min candidacy consult — he'll tell you up front whether you're a fit:
+If you'd rather just see what's open, here's Dr. Ritucci's 15-min candidacy consult  -  he'll tell you up front whether you're a fit:
 
 [See Available Times]
 
@@ -106,7 +106,7 @@ Not ready to book? Reply with your biggest question and I'll answer it personall
 """
 
 SMS_D1 = (
-    "Hey {{contact.first_name}} — {{custom_values.text_message_name}} from Ritucci. "
+    "Hey {{contact.first_name}}  -  {{custom_values.text_message_name}} from Ritucci. "
     "Quick one to match the email: surgery on the table, or trying to avoid "
     "getting there? Reply 'surgery' or 'pain' and I'll send the right info."
 )
@@ -118,25 +118,25 @@ E2_BODY = """{{contact.first_name}},
 
 When patients reach out about the Ultra protocol, three concerns come up almost every time. Worth handling them up front instead of dancing around them.
 
-**1. "It's expensive — I'm not sure it's worth it."**
+**1. "It's expensive  -  I'm not sure it's worth it."**
 
-Fair. The Ultra package isn't a $1,700 single-injection PRP — it's a multi-phase plan, customized to the joint and severity. Pricing's set on the consult because the protocol layers vary per case. We have payment plans and financing so the math is workable for most patients. The 15-minute consult is free, so you see the number before deciding.
+Fair. The Ultra package isn't a $1,700 single-injection PRP  -  it's a multi-phase plan, customized to the joint and severity. Pricing's set on the consult because the protocol layers vary per case. We have payment plans and financing so the math is workable for most patients. The 15-minute consult is free, so you see the number before deciding.
 
 **2. "What if it doesn't work for me?"**
 
-Honest answer: not every joint is a candidate. Severe end-stage cartilage loss isn't something a regenerative protocol fixes. That's why every patient gets a candidacy review first — Dr. Ritucci tells you up front if it's not a fit and points you to a better path. The plan also re-tunes if you're not progressing as expected, so no one stays stuck on a protocol that isn't working.
+Honest answer: not every joint is a candidate. Severe end-stage cartilage loss isn't something a regenerative protocol fixes. That's why every patient gets a candidacy review first  -  Dr. Ritucci tells you up front if it's not a fit and points you to a better path. The plan also re-tunes if you're not progressing as expected, so no one stays stuck on a protocol that isn't working.
 
-**3. "I need time to think — or to talk to my spouse."**
+**3. "I need time to think  -  or to talk to my spouse."**
 
 Totally normal. Bring your spouse to the 15-min consult. Most patients do.
 
-Now the part most clinics don't mention. The bone marrow aspiration step is brief, but the harvest site (your hip) is sore for 2–3 days afterward. Most patients are back to desk work the next day, but you're not running stairs that weekend. That's a real tradeoff — worth knowing before you commit.
+Now the part most clinics don't mention. The bone marrow aspiration step is brief, but the harvest site (your hip) is sore for 2 - 3 days afterward. Most patients are back to desk work the next day, but you're not running stairs that weekend. That's a real tradeoff  -  worth knowing before you commit.
 
 If you want to see Dr. Ritucci's 15-min consult and get the candidacy review:
 
 [See Available Times]
 
-One more thing — there's a weird thing patients say in week 4 of the protocol that surprises us every time. I'll share it in a few days.
+One more thing  -  there's a weird thing patients say in week 4 of the protocol that surprises us every time. I'll share it in a few days.
 
 {{custom_values.text_message_name}}
 {{location.name}} · {{location.phone}}
@@ -150,18 +150,18 @@ SMS_D2_5PM = (
 
 # ── D3 ──
 E3_SUBJECT = "4 things to do before any regenerative consult (no pitch in this one)"
-E3_PREVIEW = "Pure prep — these make every protocol work better whether you book with us or someone else"
+E3_PREVIEW = "Pure prep  -  these make every protocol work better whether you book with us or someone else"
 E3_BODY = """{{contact.first_name}},
 
-No pitch in this email. Just four things that meaningfully improve any regenerative consult — whether you book with us, with another clinic, or just want to be ready for when the timing's right.
+No pitch in this email. Just four things that meaningfully improve any regenerative consult  -  whether you book with us, with another clinic, or just want to be ready for when the timing's right.
 
-1. Bring imaging if you have it. X-ray or MRI of the joint speeds up the candidacy review by 10x. If you don't have any, that's fine — Dr. Ritucci does an ultrasound-guided exam at the consult.
+1. Bring imaging if you have it. X-ray or MRI of the joint speeds up the candidacy review by 10x. If you don't have any, that's fine  -  Dr. Ritucci does an ultrasound-guided exam at the consult.
 
 2. Hydrate well the 48 hours before. Better blood draw, better PRP yield. Not optional if you want the protocol to work the way it's designed to.
 
 3. Skip NSAIDs (ibuprofen, Aleve) for 7 days before any procedure. They blunt the inflammatory cascade that the regenerative response relies on. Most clinics forget to tell you this.
 
-4. Plan a 2–3 day light schedule after the procedure. The injections themselves are quick, but the harvest site needs a couple of low-activity days to settle.
+4. Plan a 2 - 3 day light schedule after the procedure. The injections themselves are quick, but the harvest site needs a couple of low-activity days to settle.
 
 That's it. File this away.
 
@@ -172,27 +172,27 @@ P.S. If you do want to grab the 15-min consult: [{{custom_values.booking_link}}]
 """
 
 SMS_D3 = (
-    "Quick one, {{contact.first_name}} — what's the one daily activity your "
+    "Quick one, {{contact.first_name}}  -  what's the one daily activity your "
     "joint pain interferes with most? Stairs, sleep, walking, exercise, "
     "something else? Trying to get the picture for Dr. Ritucci's review."
 )
 
-# ── D4 — Variant A (surgery-avoider segment / openers + clickers) ──
+# ── D4  -  Variant A (surgery-avoider segment / openers + clickers) ──
 E4A_SUBJECT = "the patient who told me he'd already scheduled the surgery"
-E4A_PREVIEW = "Sometimes the timeline tightens up — here's how that played out for one patient last year"
+E4A_PREVIEW = "Sometimes the timeline tightens up  -  here's how that played out for one patient last year"
 E4A_BODY = """{{contact.first_name}},
 
-A patient came in last year — early 60s, knee pain for almost two years, told by his orthopedist he was looking at a knee replacement. He'd already scheduled the surgery for three months out.
+A patient came in last year  -  early 60s, knee pain for almost two years, told by his orthopedist he was looking at a knee replacement. He'd already scheduled the surgery for three months out.
 
 He came to Dr. Ritucci's consult mostly to "be sure he'd exhausted everything" before going under.
 
-Imaging review showed he was a candidate. Dr. Ritucci was honest with him: the protocol may help reduce pain and improve function, but it wasn't a guaranteed alternative — it depended on how his joint responded over the 8–12 weeks.
+Imaging review showed he was a candidate. Dr. Ritucci was honest with him: the protocol may help reduce pain and improve function, but it wasn't a guaranteed alternative  -  it depended on how his joint responded over the 8 - 12 weeks.
 
 He decided to try it before the surgery date.
 
 Eight weeks in, he told us something I think about a lot: "I forgot I had the surgery scheduled."
 
-That's not a guarantee for anyone reading this — every joint is different, and outcomes depend on candidacy and severity. But it's the kind of case that's why Dr. Ritucci built the protocol.
+That's not a guarantee for anyone reading this  -  every joint is different, and outcomes depend on candidacy and severity. But it's the kind of case that's why Dr. Ritucci built the protocol.
 
 Want me to send one more story I think matches your case? Reply 'story' and I'll send.
 
@@ -204,14 +204,14 @@ Or if you want to see whether you're a candidate yourself:
 {{location.name}} · {{location.phone}}
 """
 
-# ── D4 — Variant B (flare-up-pain segment / non-openers — short re-subject) ──
+# ── D4  -  Variant B (flare-up-pain segment / non-openers  -  short re-subject) ──
 E4B_SUBJECT = "still here if the joint pain's still there"
 E4B_PREVIEW = "Short note in case the previous emails got buried"
 E4B_BODY = """{{contact.first_name}},
 
-Quick one — sending a short version since the longer emails this week may have gotten buried.
+Quick one  -  sending a short version since the longer emails this week may have gotten buried.
 
-If you're still dealing with chronic joint pain and curious whether you're a candidate for a regenerative protocol (PRP + bone marrow concentrate + A2M + focused shockwave, customized over 8–12 weeks), Dr. Ritucci's 15-min candidacy consult is the next step.
+If you're still dealing with chronic joint pain and curious whether you're a candidate for a regenerative protocol (PRP + bone marrow concentrate + A2M + focused shockwave, customized over 8 - 12 weeks), Dr. Ritucci's 15-min candidacy consult is the next step.
 
 He tells you honestly whether you're a fit. If you're not, he'll point you to a better path.
 
@@ -224,33 +224,33 @@ Reply 'story' if you want one more patient case before you decide.
 """
 
 SMS_D4_5PM = (
-    "{{contact.first_name}} — I know I've been emailing. If it's annoying, "
+    "{{contact.first_name}}  -  I know I've been emailing. If it's annoying, "
     "just reply 'less' and I'll switch to text-only. Or 'story' and I'll send "
     "one more patient case I think matches yours."
 )
 
-# ── D5 — 5pm SMS (curiosity gap; deadline email DROPPED — has_deadline=false) ──
+# ── D5  -  5pm SMS (curiosity gap; deadline email DROPPED  -  has_deadline=false) ──
 SMS_D5_5PM = (
     "{{contact.first_name}}, weird question: what's the one thing you'd be "
-    "doing right now if your joint didn't hurt? Just curious — not selling."
+    "doing right now if your joint didn't hurt? Just curious  -  not selling."
 )
 
-# ── D7 — Variant A (closes the D2 Zeigarnik loop) ──
+# ── D7  -  Variant A (closes the D2 Zeigarnik loop) ──
 E7A_SUBJECT = "remember when I said there's a weird thing patients say in week 4?"
-E7A_PREVIEW = "Closing the loop from earlier this week — and one realistic ask"
+E7A_PREVIEW = "Closing the loop from earlier this week  -  and one realistic ask"
 E7A_BODY = """{{contact.first_name}},
 
-I owe you the close from earlier this week — I said there's a thing patients say around week 4 of the protocol that surprises us every time.
+I owe you the close from earlier this week  -  I said there's a thing patients say around week 4 of the protocol that surprises us every time.
 
 Here it is.
 
 The most common version is some flavor of: "I wish I'd done this sooner."
 
-Not "this fixed me" — most patients don't talk that way after week 4 because the protocol's still running. It's the looking-back-at-the-last-two-years-of-trying-everything-else feeling. Every cortisone shot, every round of PT, every "let's wait and see" appointment.
+Not "this fixed me"  -  most patients don't talk that way after week 4 because the protocol's still running. It's the looking-back-at-the-last-two-years-of-trying-everything-else feeling. Every cortisone shot, every round of PT, every "let's wait and see" appointment.
 
-The reason I think it's worth sharing isn't to push you. It's that it's the same regret pattern most patients describe before they book — they just describe it about waiting too long, not waiting too short.
+The reason I think it's worth sharing isn't to push you. It's that it's the same regret pattern most patients describe before they book  -  they just describe it about waiting too long, not waiting too short.
 
-So one direct ask: what's the one thing keeping you from booking the candidacy consult? Reply with the answer — even one word — and I'll respond honestly. If it's a fit, I'll show you the next step. If not, I'll tell you and stop emailing.
+So one direct ask: what's the one thing keeping you from booking the candidacy consult? Reply with the answer  -  even one word  -  and I'll respond honestly. If it's a fit, I'll show you the next step. If not, I'll tell you and stop emailing.
 
 Or if you want to skip the email and go straight to the 15-min consult:
 
@@ -260,16 +260,16 @@ Or if you want to skip the email and go straight to the 15-min consult:
 {{location.name}} · {{location.phone}}
 """
 
-# ── D7 — Variant B (non-openers — direct restate) ──
+# ── D7  -  Variant B (non-openers  -  direct restate) ──
 E7B_SUBJECT = "one direct question for you"
-E7B_PREVIEW = "If you're done thinking about this, fine — just want to know"
+E7B_PREVIEW = "If you're done thinking about this, fine  -  just want to know"
 E7B_BODY = """{{contact.first_name}},
 
 One direct question.
 
 What's the one thing keeping you from booking the 15-min consult to see if you're a candidate for the regenerative protocol?
 
-Reply with the answer — cost, timing, "not sure it'll work", "talking to my spouse", or "not the right time" all count. I'll respond honestly. If it's a fit I'll show you the next step. If not, I'll stop emailing.
+Reply with the answer  -  cost, timing, "not sure it'll work", "talking to my spouse", or "not the right time" all count. I'll respond honestly. If it's a fit I'll show you the next step. If not, I'll stop emailing.
 
 Or just grab a slot:
 
@@ -280,25 +280,25 @@ Or just grab a slot:
 """
 
 SMS_D7 = (
-    "{{contact.first_name}}, one direct question — what's the actual reason "
+    "{{contact.first_name}}, one direct question  -  what's the actual reason "
     "you haven't booked the 15-min consult yet? Cost, timing, doubt, or "
     "something else? I'll answer honestly."
 )
 
-# ── D10 — Logic + cost-of-inaction email ──
+# ── D10  -  Logic + cost-of-inaction email ──
 E10_SUBJECT = "the math most patients don't do until it's too late"
-E10_PREVIEW = "Not financial math — joint math. Worth 60 seconds."
+E10_PREVIEW = "Not financial math  -  joint math. Worth 60 seconds."
 E10_BODY = """{{contact.first_name}},
 
 There's a math problem most chronic-pain patients don't run until it's too late. It goes like this.
 
-The longer a degenerating joint stays untreated, the more compensation patterns build up — your other knee, your hips, your lower back start absorbing the load. By the time you get to surgery, you're not just rehabbing one joint — you're untangling years of compensation.
+The longer a degenerating joint stays untreated, the more compensation patterns build up  -  your other knee, your hips, your lower back start absorbing the load. By the time you get to surgery, you're not just rehabbing one joint  -  you're untangling years of compensation.
 
 That's not a scare tactic. It's the reason "wait and see" is the most expensive option for chronic joint pain. Not in dollars. In the additional joints that quietly take on damage while the original one keeps degenerating.
 
 The Ultra protocol is designed to support function and may help reduce pain in candidates whose joint is still in the regenerative window. That window narrows over time.
 
-Whether the answer is our protocol, surgery, or something else entirely, the action that has the lowest cost is the candidacy review — 15 minutes, free, and you walk out knowing whether you're in the window or not.
+Whether the answer is our protocol, surgery, or something else entirely, the action that has the lowest cost is the candidacy review  -  15 minutes, free, and you walk out knowing whether you're in the window or not.
 
 [See Available Times]
 
@@ -306,15 +306,15 @@ Whether the answer is our protocol, surgery, or something else entirely, the act
 {{location.name}} · {{location.phone}}
 """
 
-# ── D12 — Objection surfacer SMS ──
+# ── D12  -  Objection surfacer SMS ──
 SMS_D12 = (
-    "{{contact.first_name}}, real question — what's the actual reason you "
+    "{{contact.first_name}}, real question  -  what's the actual reason you "
     "haven't booked yet? Cost, timing, not sure it'll work, or something "
     "else? Whatever it is, I can probably answer it."
 )
 
-# ── D14 — Peak-end email + KEYWORD plant ──
-E14_SUBJECT = "Last email from me — plus my direct line"
+# ── D14  -  Peak-end email + KEYWORD plant ──
+E14_SUBJECT = "Last email from me  -  plus my direct line"
 E14_PREVIEW = "Wrapping up. Real reasons people wait, plus how to skip the line if you come back later."
 E14_BODY = """{{contact.first_name}},
 
@@ -332,9 +332,9 @@ All of those are honest reasons. None of them mean the door's closed.
 
 Two ways to come back when timing's right.
 
-1. Call us directly: {{location.phone}}. Ask for a 15-min candidacy consult — say you got my emails and want to skip the re-intake. We'll make it easy.
+1. Call us directly: {{location.phone}}. Ask for a 15-min candidacy consult  -  say you got my emails and want to skip the re-intake. We'll make it easy.
 
-2. Text the word MOVE to this number anytime. That triggers the same "skip the re-intake" path automatically — handy if you don't feel like a phone call.
+2. Text the word MOVE to this number anytime. That triggers the same "skip the re-intake" path automatically  -  handy if you don't feel like a phone call.
 
 Take care of the joint. Whether you go with us or someone else, don't sit on it.
 
@@ -348,9 +348,9 @@ SMS_D14 = (
     "you past the re-intake. Take care."
 )
 
-# ── D28 — Breakup SMS ──
+# ── D28  -  Breakup SMS ──
 SMS_D28 = (
-    "Last one, {{contact.first_name}} — closing your file today unless I "
+    "Last one, {{contact.first_name}}  -  closing your file today unless I "
     "hear back. Reply 'open' and I'll keep it active. Take care either way."
 )
 
@@ -366,7 +366,7 @@ SMS_KEYWORD_2HR_FOLLOWUP = (
 )
 
 # ── Reply handler internal alert (WF-03) ──
-REPLY_ALERT_SUBJECT = "Reply received — Ultra Regenerative Package lead"
+REPLY_ALERT_SUBJECT = "Reply received  -  Ultra Regenerative Package lead"
 REPLY_ALERT_BODY = """A lead in the Ultra Regenerative Package nurture replied.
 
 Contact: {{contact.first_name}} {{contact.last_name}}
@@ -378,7 +378,7 @@ Open the conversation in GHL and respond within 5 minutes.
 Compliance reminders:
 - Never quote a price (consult-determined only)
 - Never mention the $100 no-show fee (internal-only policy)
-- Use "supports / may help / designed to" — never "cures / heals / fixes"
+- Use "supports / may help / designed to"  -  never "cures / heals / fixes"
 - If the message contains the keyword MOVE, the keyword-recovery workflow has already fired
 """
 
@@ -387,12 +387,12 @@ Compliance reminders:
 
 CAMPAIGN = {
     "01-master": {
-        "name": "01. Ultra Regenerative Package — Master Nurture",
+        "name": "01. Ultra Regenerative Package  -  Master Nurture",
         # Trigger: Facebook Lead Form Submitted on the Ultra Regenerative ad.
         # Replace TODO_FB_PAGE_ID with the real page ID after launch (find via
         # GET /integrations/facebook/{loc}/trigger/pages once the FB ad
         # account is connected). Add "fb_form_id" to scope to a specific lead
-        # form — recommended once Free Consult and Ultra share the same page.
+        # form  -  recommended once Free Consult and Ultra share the same page.
         "trigger": {
             "type": "facebook_lead_gen",
             "fb_page_id": "TODO_FB_PAGE_ID",
@@ -445,7 +445,7 @@ CAMPAIGN = {
     },
 
     "02-keyword-recovery": {
-        "name": "02. Ultra Regenerative Package — MOVE Keyword Recovery",
+        "name": "02. Ultra Regenerative Package  -  MOVE Keyword Recovery",
         # Trigger: Customer replied to WF-01 with the offer keyword MOVE.
         # Engine resolves source_wf_key → wf_id of "01-master" automatically.
         "trigger": {
@@ -463,7 +463,7 @@ CAMPAIGN = {
     },
 
     "03-reply-handler": {
-        "name": "03. Ultra Regenerative Package — Global Reply Handler",
+        "name": "03. Ultra Regenerative Package  -  Global Reply Handler",
         # Trigger: Customer replied to WF-01 (any reply, no keyword filter).
         # Fires the internal-alert email for the front desk to take over
         # within 5 minutes. Bot then routes via the 7 branches in
@@ -495,7 +495,7 @@ def main():
     print("Testing auth...")
     test = client.request("GET", f"/workflow/{LOCATION_ID}/list?parentId=root&limit=1")
     if not test:
-        print("Auth failed — check your token.")
+        print("Auth failed  -  check your token.")
         sys.exit(1)
     print("Auth OK\n")
 
