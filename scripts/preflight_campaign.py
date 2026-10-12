@@ -92,8 +92,8 @@ def check(path):
         # W1 — blank line inside an email body
         if name.endswith("_BODY") and "\n\n" in val:
             warns.append(
-                f"W1 {name} has a blank line (\\n\\n) — renders an EMAIL_BLANK_P "
-                f"(too airy). Use single newlines between sections."
+                f"W1 {name} has a blank line (\\n\\n) — engine strips it silently, "
+                f"but use single newlines between sections for cleaner copy."
             )
 
     # W2 — required-looking ID constants left empty
