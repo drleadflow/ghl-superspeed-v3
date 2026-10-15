@@ -361,7 +361,6 @@ def dm_email(text: str) -> str:
     for i, raw in enumerate(raw_lines):
         stripped = raw.strip()
         if not stripped:
-            parts.append(EMAIL_BLANK_P)
             continue
         # Tight if THIS line is a list item AND it's not the last item in
         # the current list run (last item keeps margin so next section
